@@ -10,6 +10,7 @@ from sklearn.metrics import mean_squared_error
 # Title of the Streamlit App
 st.title("Linear Regression Example with Noise")
 
+# Create ChatGPT prompt history dialog
 with open("w3/chatgpt_prompt_history.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 @st.dialog("ChatGpt prompt history", width="large")
@@ -30,9 +31,31 @@ n_samples = st.sidebar.slider("Number of Samples", min_value=100, max_value=2000
 a_true = st.sidebar.slider("True Coefficient (a)", min_value=0.0, max_value=100.0, value=2.0)
 c_true = st.sidebar.slider("Noise Coefficient (c)", min_value=0.0, max_value=100.0, value=1.0)
 noise_scale = st.sidebar.slider("Noise Scale (c * noise)", min_value=0.0, max_value=500.0, value=100.0)
-gpt_prompt_btn = st.sidebar.button("ChatGpt Prompt")
-if gpt_prompt_btn:
-    prompt_history()
+
+# Create ChatGPT float button
+gpt_prompt_btn = st.button("", on_click=prompt_history)
+gpt_btn_style = """
+    <style>
+        button[kind="secondary"] {
+            position: fixed;
+            bottom: 60px;
+            right: 40px;
+            width: 70px;
+            height: 70px;
+            background-image: url("https://cdn-icons-png.flaticon.com/512/12222/12222588.png");
+            background-size: cover;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button[kind="secondary"]:hover {
+            border
+        }
+    </style>
+"""
+st.markdown(gpt_btn_style, unsafe_allow_html=True)
 
 # CRISP-DM Step 2: Data Understanding - Generate synthetic data
 np.random.seed(42)  # For reproducibility
