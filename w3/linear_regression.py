@@ -1,12 +1,20 @@
 import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
+import streamlit.components.v1 as components 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
+
 # Title of the Streamlit App
 st.title("Linear Regression Example with Noise")
+
+with open("w3/chatgpt_prompt_history.html", "r", encoding="utf-8") as f:
+    html_content = f.read()
+@st.dialog("ChatGpt prompt history", width="large")
+def prompt_history():
+    components.html(html_content, width=700, height=600, scrolling=True)
 
 # CRISP-DM Step 1: Business Understanding
 st.markdown("""
@@ -22,12 +30,9 @@ n_samples = st.sidebar.slider("Number of Samples", min_value=100, max_value=2000
 a_true = st.sidebar.slider("True Coefficient (a)", min_value=0.0, max_value=100.0, value=2.0)
 c_true = st.sidebar.slider("Noise Coefficient (c)", min_value=0.0, max_value=100.0, value=1.0)
 noise_scale = st.sidebar.slider("Noise Scale (c * noise)", min_value=0.0, max_value=500.0, value=100.0)
-st.sidebar.markdown(
-    """
-        [View Shared ChatGPT Session](https://chatgpt.com/share/66f40a4f-2084-8003-9a62-5bb5b9f8d473)
-    """,
-    unsafe_allow_html=True
-)
+gpt_prompt_btn = st.sidebar.button("ChatGpt Prompt")
+if gpt_prompt_btn:
+    prompt_history()
 
 # CRISP-DM Step 2: Data Understanding - Generate synthetic data
 np.random.seed(42)  # For reproducibility

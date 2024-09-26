@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)https://chatgpt.com/share/66f40a4f-2084-8003-9a62-5bb5b9f8d473 -->
+<html data-build="prod-e6c81fd24ded3d6fa7c5b1ed2499ee699a1d28cc" dir="ltr" class="dark" style="color-scheme: dark;"
+    lang="zh-TW">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://cdn.oaistatic.com/">
+    <meta name="robots" content="index, follow">
+    <meta name="apple-itunes-app" content="app-id=6448311069">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.oaistatic.com/assets/apple-touch-icon-mz9nytnj.webp">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.oaistatic.com/assets/favicon-32x32-p4ktpm1x.webp"
+        media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://cdn.oaistatic.com/assets/favicon-dark-32x32-gt5kfzyp.webp" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="https://cdn.oaistatic.com/assets/favicon-o20kmmos.svg">
+    <title>ChatGPT - Linear Regression with CRISP-DM</title>
+    <meta property="og:site_name" content="ChatGPT">
+    <meta name="robots" content="noindex,nofollow">
+    <meta property="og:title" content="ChatGPT - Linear Regression with CRISP-DM">
+    <meta property="og:description" content="Shared via ChatGPT">
+    <meta property="og:image" content="https://cdn.oaistatic.com/assets/chatgpt-share-og-u7j5uyao.webp">
+    <meta property="og:url" content="https://chatgpt.com/share/66f40a4f-2084-8003-9a62-5bb5b9f8d473">
+    <link rel="stylesheet" href="https://cdn.oaistatic.com/assets/root-hnmrrqbf.css"/>
+    <link rel="stylesheet" href="https://cdn.oaistatic.com/assets/conversation-small-eplmind9.css"/>
+</head>
+
+<body class="">
+    <script>
+        ! function () {
+            try {
+                var d = document.documentElement,
+                    c = d.classList;
+                c.remove('light', 'dark');
+                var e = localStorage.getItem('theme');
+                if ('system' === e || (!e && true)) {
+                    var t = '(prefers-color-scheme: dark)',
+                        m = window.matchMedia(t);
+                    if (m.media !== t || m.matches) {
+                        d.style.colorScheme = 'dark';
+                        c.add('dark')
+                    } else {
+                        d.style.colorScheme = 'light';
+                        c.add('light')
+                    }
+                } else if (e) {
+                    c.add(e || '')
+                }
+                if (e === 'light' || e === 'dark') d.style.colorScheme = e
+            } catch (e) {}
+        }()
+    </script>
+    <div class="flex h-full flex-col">
+        <div class="grow overflow-auto bg-token-main-surface-primary pt-2 md:pb-9">
+            <div
+                class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                <div class="border-b border-gray-100 px-4 pb-4 pt-3 sm:mb-2 sm:pb-6 sm:pt-8 md:px-0">
+                    <h1 class="text-3xl font-semibold leading-tight text-token-text-primary sm:text-4xl">Linear
+                        Regression with CRISP-DM</h1>
+                    <div class="pt-3 text-base text-gray-400 sm:pt-4">2024年9月25日</div>
+                    <div class="mt-4">
+                        <div
+                            class="mb-4 flex items-start justify-start gap-2.5 rounded-md bg-token-main-surface-tertiary p-4 text-token-text-secondary last:mb-0">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="icon-sm mt-1 flex-shrink-0">
+                                <path
+                                    d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12V16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16V12Z"
+                                    fill="currentColor"></path>
+                                <path
+                                    d="M12 9.5C12.6904 9.5 13.25 8.94036 13.25 8.25C13.25 7.55964 12.6904 7 12 7C11.3096 7 10.75 7.55964 10.75 8.25C10.75 8.94036 11.3096 9.5 12 9.5Z"
+                                    fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12Z"
+                                    fill="currentColor"></path>
+                            </svg>此對話可能會透露建立者的個人化資料，這些資料並不會與他人共享，並且可能大幅影響模型的回應方式。</div>
+                    </div>
+                </div>
+            </div>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-2" data-scroll-anchor="false">
+                <h5 class="sr-only">你說：</h5>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="user"
+                                        data-message-id="aaa27118-fb13-44ed-897a-d489cc208ca4" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start">
+                                            <div
+                                                class="relative max-w-[70%] rounded-3xl px-5 py-2.5 bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
+                                                <div class="whitespace-pre-wrap">write python to solve linear regression problem y=a⋅X+50+c⋅noise and follow CRISP-DM</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-3" data-scroll-anchor="false">
+                <h6 class="sr-only">ChatGPT 說：</h6>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="flex-shrink-0 flex flex-col relative items-end">
+                            <div>
+                                <div class="pt-0">
+                                    <div
+                                        class="gizmo-bot-avatar flex h-8 w-8 items-center justify-center overflow-hidden rounded-full">
+                                        <div
+                                            class="relative p-1 rounded-sm flex items-center justify-center bg-token-main-surface-primary text-token-text-primary h-8 w-8">
+                                            <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="icon-md" role="img"><text
+                                                    x="-9999" y="-9999">ChatGPT</text>
+                                                <path
+                                                    d="M37.5324 16.8707C37.9808 15.5241 38.1363 14.0974 37.9886 12.6859C37.8409 11.2744 37.3934 9.91076 36.676 8.68622C35.6126 6.83404 33.9882 5.3676 32.0373 4.4985C30.0864 3.62941 27.9098 3.40259 25.8215 3.85078C24.8796 2.7893 23.7219 1.94125 22.4257 1.36341C21.1295 0.785575 19.7249 0.491269 18.3058 0.500197C16.1708 0.495044 14.0893 1.16803 12.3614 2.42214C10.6335 3.67624 9.34853 5.44666 8.6917 7.47815C7.30085 7.76286 5.98686 8.3414 4.8377 9.17505C3.68854 10.0087 2.73073 11.0782 2.02839 12.312C0.956464 14.1591 0.498905 16.2988 0.721698 18.4228C0.944492 20.5467 1.83612 22.5449 3.268 24.1293C2.81966 25.4759 2.66413 26.9026 2.81182 28.3141C2.95951 29.7256 3.40701 31.0892 4.12437 32.3138C5.18791 34.1659 6.8123 35.6322 8.76321 36.5013C10.7141 37.3704 12.8907 37.5973 14.9789 37.1492C15.9208 38.2107 17.0786 39.0587 18.3747 39.6366C19.6709 40.2144 21.0755 40.5087 22.4946 40.4998C24.6307 40.5054 26.7133 39.8321 28.4418 38.5772C30.1704 37.3223 31.4556 35.5506 32.1119 33.5179C33.5027 33.2332 34.8167 32.6547 35.9659 31.821C37.115 30.9874 38.0728 29.9178 38.7752 28.684C39.8458 26.8371 40.3023 24.6979 40.0789 22.5748C39.8556 20.4517 38.9639 18.4544 37.5324 16.8707ZM22.4978 37.8849C20.7443 37.8874 19.0459 37.2733 17.6994 36.1501C17.7601 36.117 17.8666 36.0586 17.936 36.0161L25.9004 31.4156C26.1003 31.3019 26.2663 31.137 26.3813 30.9378C26.4964 30.7386 26.5563 30.5124 26.5549 30.2825V19.0542L29.9213 20.998C29.9389 21.0068 29.9541 21.0198 29.9656 21.0359C29.977 21.052 29.9842 21.0707 29.9867 21.0902V30.3889C29.9842 32.375 29.1946 34.2791 27.7909 35.6841C26.3872 37.0892 24.4838 37.8806 22.4978 37.8849ZM6.39227 31.0064C5.51397 29.4888 5.19742 27.7107 5.49804 25.9832C5.55718 26.0187 5.66048 26.0818 5.73461 26.1244L13.699 30.7248C13.8975 30.8408 14.1233 30.902 14.3532 30.902C14.583 30.902 14.8088 30.8408 15.0073 30.7248L24.731 25.1103V28.9979C24.7321 29.0177 24.7283 29.0376 24.7199 29.0556C24.7115 29.0736 24.6988 29.0893 24.6829 29.1012L16.6317 33.7497C14.9096 34.7416 12.8643 35.0097 10.9447 34.4954C9.02506 33.9811 7.38785 32.7263 6.39227 31.0064ZM4.29707 13.6194C5.17156 12.0998 6.55279 10.9364 8.19885 10.3327C8.19885 10.4013 8.19491 10.5228 8.19491 10.6071V19.808C8.19351 20.0378 8.25334 20.2638 8.36823 20.4629C8.48312 20.6619 8.64893 20.8267 8.84863 20.9404L18.5723 26.5542L15.206 28.4979C15.1894 28.5089 15.1703 28.5155 15.1505 28.5173C15.1307 28.5191 15.1107 28.516 15.0924 28.5082L7.04046 23.8557C5.32135 22.8601 4.06716 21.2235 3.55289 19.3046C3.03862 17.3858 3.30624 15.3413 4.29707 13.6194ZM31.955 20.0556L22.2312 14.4411L25.5976 12.4981C25.6142 12.4872 25.6333 12.4805 25.6531 12.4787C25.6729 12.4769 25.6928 12.4801 25.7111 12.4879L33.7631 17.1364C34.9967 17.849 36.0017 18.8982 36.6606 20.1613C37.3194 21.4244 37.6047 22.849 37.4832 24.2684C37.3617 25.6878 36.8382 27.0432 35.9743 28.1759C35.1103 29.3086 33.9415 30.1717 32.6047 30.6641C32.6047 30.5947 32.6047 30.4733 32.6047 30.3889V21.188C32.6066 20.9586 32.5474 20.7328 32.4332 20.5338C32.319 20.3348 32.154 20.1698 31.955 20.0556ZM35.3055 15.0128C35.2464 14.9765 35.1431 14.9142 35.069 14.8717L27.1045 10.2712C26.906 10.1554 26.6803 10.0943 26.4504 10.0943C26.2206 10.0943 25.9948 10.1554 25.7963 10.2712L16.0726 15.8858V11.9982C16.0715 11.9783 16.0753 11.9585 16.0837 11.9405C16.0921 11.9225 16.1048 11.9068 16.1207 11.8949L24.1719 7.25025C25.4053 6.53903 26.8158 6.19376 28.2383 6.25482C29.6608 6.31589 31.0364 6.78077 32.2044 7.59508C33.3723 8.40939 34.2842 9.53945 34.8334 10.8531C35.3826 12.1667 35.5464 13.6095 35.3055 15.0128ZM14.2424 21.9419L10.8752 19.9981C10.8576 19.9893 10.8423 19.9763 10.8309 19.9602C10.8195 19.9441 10.8122 19.9254 10.8098 19.9058V10.6071C10.8107 9.18295 11.2173 7.78848 11.9819 6.58696C12.7466 5.38544 13.8377 4.42659 15.1275 3.82264C16.4173 3.21869 17.8524 2.99464 19.2649 3.1767C20.6775 3.35876 22.0089 3.93941 23.1034 4.85067C23.0427 4.88379 22.937 4.94215 22.8668 4.98473L14.9024 9.58517C14.7025 9.69878 14.5366 9.86356 14.4215 10.0626C14.3065 10.2616 14.2466 10.4877 14.2479 10.7175L14.2424 21.9419ZM16.071 17.9991L20.4018 15.4978L24.7325 17.9975V22.9985L20.4018 25.4983L16.071 22.9985V17.9991Z"
+                                                    fill="currentColor"></path>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="assistant"
+                                        data-message-id="0b3fa37a-b661-403f-855a-fd8284995647" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]">
+                                            <div class="markdown prose w-full break-words dark:prose-invert dark">
+                                                <p>To solve a linear regression problem where <span class="katex"><span
+                                                            class="katex-mathml"><math
+                                                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                <semantics>
+                                                                    <mrow>
+                                                                        <mi>y</mi>
+                                                                        <mo>=</mo>
+                                                                        <mi>a</mi>
+                                                                        <mo>⋅</mo>
+                                                                        <mi>X</mi>
+                                                                        <mo>+</mo>
+                                                                        <mn>50</mn>
+                                                                        <mo>+</mo>
+                                                                        <mi>c</mi>
+                                                                        <mo>⋅</mo>
+                                                                        <mtext>noise</mtext>
+                                                                    </mrow>
+                                                                    <annotation encoding="application/x-tex">y = a \cdot
+                                                                        X + 50 + c \cdot \text{noise}</annotation>
+                                                                </semantics>
+                                                            </math></span><span class="katex-html"
+                                                            aria-hidden="true"><span class="base"><span class="strut"
+                                                                    style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                                                    class="mord mathnormal"
+                                                                    style="margin-right: 0.03588em;">y</span><span
+                                                                    class="mspace"
+                                                                    style="margin-right: 0.2778em;"></span><span
+                                                                    class="mrel">=</span><span class="mspace"
+                                                                    style="margin-right: 0.2778em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.4445em;"></span><span
+                                                                    class="mord mathnormal">a</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span><span
+                                                                    class="mbin">⋅</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.7667em; vertical-align: -0.0833em;"></span><span
+                                                                    class="mord mathnormal"
+                                                                    style="margin-right: 0.07847em;">X</span><span
+                                                                    class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span><span
+                                                                    class="mbin">+</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                                                    class="mord">50</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span><span
+                                                                    class="mbin">+</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.4445em;"></span><span
+                                                                    class="mord mathnormal">c</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span><span
+                                                                    class="mbin">⋅</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.6679em;"></span><span
+                                                                    class="mord text"><span
+                                                                        class="mord">noise</span></span></span></span></span>
+                                                    using Python, and to structure the approach following the CRISP-DM
+                                                    methodology (Cross Industry Standard Process for Data Mining), we
+                                                    can break down the process as follows:</p>
+                                                <h3>CRISP-DM Phases:</h3>
+                                                <ol>
+                                                    <li>
+                                                        <p><strong>Business Understanding</strong>:<br>The goal is to
+                                                            model a linear relationship between a feature <code>X</code>
+                                                            and a target <code>y</code>. We'll estimate the coefficient
+                                                            <code>a</code> while accounting for some noise scaled by
+                                                            <code>c</code>.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Data Understanding</strong>:<br>Simulate the dataset
+                                                            with a known linear relationship (e.g., a = 2, c = 1, noise
+                                                            = normal distribution).</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Data Preparation</strong>:<br>Split the dataset into
+                                                            training and testing sets. No complex preprocessing is
+                                                            needed for synthetic data.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Modeling</strong>:<br>Use Linear Regression to model
+                                                            the data.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Evaluation</strong>:<br>Evaluate the model using
+                                                            metrics such as Mean Squared Error (MSE) and visualize the
+                                                            predictions.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Deployment</strong>:<br>While deployment isn't
+                                                            necessary in this case, the results will be shown for
+                                                            clarity.</p>
+                                                    </li>
+                                                </ol>
+                                                <h3>Python Code Example:</h3>
+                                                <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">python</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+<span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> mean_squared_error
+
+<span class="hljs-comment"># CRISP-DM Step 1: Business Understanding (Solving y = a * X + 50 + c * noise)</span>
+
+<span class="hljs-comment"># CRISP-DM Step 2: Data Understanding - Generate synthetic data</span>
+np.random.seed(<span class="hljs-number">42</span>)  <span class="hljs-comment"># For reproducibility</span>
+n_samples = <span class="hljs-number">1000</span>
+X = np.random.rand(n_samples, <span class="hljs-number">1</span>) * <span class="hljs-number">10</span>  <span class="hljs-comment"># Random X values between 0 and 10</span>
+a_true = <span class="hljs-number">2</span>  <span class="hljs-comment"># True slope</span>
+c_true = <span class="hljs-number">1</span>  <span class="hljs-comment"># True noise coefficient</span>
+noise = np.random.randn(n_samples, <span class="hljs-number">1</span>)  <span class="hljs-comment"># Normally distributed noise</span>
+y = a_true * X + <span class="hljs-number">50</span> + c_true * noise
+
+<span class="hljs-comment"># CRISP-DM Step 3: Data Preparation - Split into training and test sets</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 4: Modeling - Train the Linear Regression model</span>
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+<span class="hljs-comment"># CRISP-DM Step 5: Evaluation - Predict on test set and evaluate</span>
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+
+<span class="hljs-comment"># Print the results</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f"Estimated coefficient (a): <span class="hljs-subst">{model.coef_[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]}</span>"</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f"Intercept: <span class="hljs-subst">{model.intercept_[<span class="hljs-number">0</span>]}</span>"</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f"Mean Squared Error: <span class="hljs-subst">{mse}</span>"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 5 (cont.): Visualize the predictions</span>
+plt.scatter(X_test, y_test, color=<span class="hljs-string">'blue'</span>, label=<span class="hljs-string">'True values'</span>)
+plt.plot(X_test, y_pred, color=<span class="hljs-string">'red'</span>, label=<span class="hljs-string">'Predicted values'</span>, linewidth=<span class="hljs-number">2</span>)
+plt.title(<span class="hljs-string">'Linear Regression Predictions'</span>)
+plt.xlabel(<span class="hljs-string">'X'</span>)
+plt.ylabel(<span class="hljs-string">'y'</span>)
+plt.legend()
+plt.show()
+
+<span class="hljs-comment"># CRISP-DM Step 6: Deployment - In a real-world scenario, save the model for later use.</span>
+</code></div></div></pre>
+                                                <h3>Breakdown of Steps:</h3>
+                                                <ol>
+                                                    <li><strong>Business Understanding</strong>: The synthetic problem
+                                                        aims to fit a linear model to noisy data.</li>
+                                                    <li><strong>Data Understanding</strong>: Data is generated with a
+                                                        random feature <code>X</code> and a known linear relationship
+                                                        between <code>X</code> and the target <code>y</code>.</li>
+                                                    <li><strong>Data Preparation</strong>: Data is split into training
+                                                        and test sets to evaluate model generalization.</li>
+                                                    <li><strong>Modeling</strong>: A simple linear regression model is
+                                                        trained using <code>scikit-learn</code>.</li>
+                                                    <li><strong>Evaluation</strong>: The model’s performance is
+                                                        evaluated using MSE, and the predictions are visualized with a
+                                                        scatter plot and a regression line.</li>
+                                                    <li><strong>Deployment</strong>: In real-world applications, the
+                                                        model would be saved, but here it’s visualized for
+                                                        interpretability.</li>
+                                                </ol>
+                                                <p>Would you like to dive deeper into any specific phase of CRISP-DM or
+                                                    modify the code for additional functionalities?</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-4" data-scroll-anchor="false">
+                <h5 class="sr-only">你說：</h5>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="user"
+                                        data-message-id="aaa27172-9f9e-4856-af72-e225c3a4f59a" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start">
+                                            <div
+                                                class="relative max-w-[70%] rounded-3xl px-5 py-2.5 bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
+                                                <div class="whitespace-pre-wrap">convert to streamlit don’t use
+                                                    matplotlib</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-5" data-scroll-anchor="false">
+                <h6 class="sr-only">ChatGPT 說：</h6>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="flex-shrink-0 flex flex-col relative items-end">
+                            <div>
+                                <div class="pt-0">
+                                    <div
+                                        class="gizmo-bot-avatar flex h-8 w-8 items-center justify-center overflow-hidden rounded-full">
+                                        <div
+                                            class="relative p-1 rounded-sm flex items-center justify-center bg-token-main-surface-primary text-token-text-primary h-8 w-8">
+                                            <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="icon-md" role="img"><text
+                                                    x="-9999" y="-9999">ChatGPT</text>
+                                                <path
+                                                    d="M37.5324 16.8707C37.9808 15.5241 38.1363 14.0974 37.9886 12.6859C37.8409 11.2744 37.3934 9.91076 36.676 8.68622C35.6126 6.83404 33.9882 5.3676 32.0373 4.4985C30.0864 3.62941 27.9098 3.40259 25.8215 3.85078C24.8796 2.7893 23.7219 1.94125 22.4257 1.36341C21.1295 0.785575 19.7249 0.491269 18.3058 0.500197C16.1708 0.495044 14.0893 1.16803 12.3614 2.42214C10.6335 3.67624 9.34853 5.44666 8.6917 7.47815C7.30085 7.76286 5.98686 8.3414 4.8377 9.17505C3.68854 10.0087 2.73073 11.0782 2.02839 12.312C0.956464 14.1591 0.498905 16.2988 0.721698 18.4228C0.944492 20.5467 1.83612 22.5449 3.268 24.1293C2.81966 25.4759 2.66413 26.9026 2.81182 28.3141C2.95951 29.7256 3.40701 31.0892 4.12437 32.3138C5.18791 34.1659 6.8123 35.6322 8.76321 36.5013C10.7141 37.3704 12.8907 37.5973 14.9789 37.1492C15.9208 38.2107 17.0786 39.0587 18.3747 39.6366C19.6709 40.2144 21.0755 40.5087 22.4946 40.4998C24.6307 40.5054 26.7133 39.8321 28.4418 38.5772C30.1704 37.3223 31.4556 35.5506 32.1119 33.5179C33.5027 33.2332 34.8167 32.6547 35.9659 31.821C37.115 30.9874 38.0728 29.9178 38.7752 28.684C39.8458 26.8371 40.3023 24.6979 40.0789 22.5748C39.8556 20.4517 38.9639 18.4544 37.5324 16.8707ZM22.4978 37.8849C20.7443 37.8874 19.0459 37.2733 17.6994 36.1501C17.7601 36.117 17.8666 36.0586 17.936 36.0161L25.9004 31.4156C26.1003 31.3019 26.2663 31.137 26.3813 30.9378C26.4964 30.7386 26.5563 30.5124 26.5549 30.2825V19.0542L29.9213 20.998C29.9389 21.0068 29.9541 21.0198 29.9656 21.0359C29.977 21.052 29.9842 21.0707 29.9867 21.0902V30.3889C29.9842 32.375 29.1946 34.2791 27.7909 35.6841C26.3872 37.0892 24.4838 37.8806 22.4978 37.8849ZM6.39227 31.0064C5.51397 29.4888 5.19742 27.7107 5.49804 25.9832C5.55718 26.0187 5.66048 26.0818 5.73461 26.1244L13.699 30.7248C13.8975 30.8408 14.1233 30.902 14.3532 30.902C14.583 30.902 14.8088 30.8408 15.0073 30.7248L24.731 25.1103V28.9979C24.7321 29.0177 24.7283 29.0376 24.7199 29.0556C24.7115 29.0736 24.6988 29.0893 24.6829 29.1012L16.6317 33.7497C14.9096 34.7416 12.8643 35.0097 10.9447 34.4954C9.02506 33.9811 7.38785 32.7263 6.39227 31.0064ZM4.29707 13.6194C5.17156 12.0998 6.55279 10.9364 8.19885 10.3327C8.19885 10.4013 8.19491 10.5228 8.19491 10.6071V19.808C8.19351 20.0378 8.25334 20.2638 8.36823 20.4629C8.48312 20.6619 8.64893 20.8267 8.84863 20.9404L18.5723 26.5542L15.206 28.4979C15.1894 28.5089 15.1703 28.5155 15.1505 28.5173C15.1307 28.5191 15.1107 28.516 15.0924 28.5082L7.04046 23.8557C5.32135 22.8601 4.06716 21.2235 3.55289 19.3046C3.03862 17.3858 3.30624 15.3413 4.29707 13.6194ZM31.955 20.0556L22.2312 14.4411L25.5976 12.4981C25.6142 12.4872 25.6333 12.4805 25.6531 12.4787C25.6729 12.4769 25.6928 12.4801 25.7111 12.4879L33.7631 17.1364C34.9967 17.849 36.0017 18.8982 36.6606 20.1613C37.3194 21.4244 37.6047 22.849 37.4832 24.2684C37.3617 25.6878 36.8382 27.0432 35.9743 28.1759C35.1103 29.3086 33.9415 30.1717 32.6047 30.6641C32.6047 30.5947 32.6047 30.4733 32.6047 30.3889V21.188C32.6066 20.9586 32.5474 20.7328 32.4332 20.5338C32.319 20.3348 32.154 20.1698 31.955 20.0556ZM35.3055 15.0128C35.2464 14.9765 35.1431 14.9142 35.069 14.8717L27.1045 10.2712C26.906 10.1554 26.6803 10.0943 26.4504 10.0943C26.2206 10.0943 25.9948 10.1554 25.7963 10.2712L16.0726 15.8858V11.9982C16.0715 11.9783 16.0753 11.9585 16.0837 11.9405C16.0921 11.9225 16.1048 11.9068 16.1207 11.8949L24.1719 7.25025C25.4053 6.53903 26.8158 6.19376 28.2383 6.25482C29.6608 6.31589 31.0364 6.78077 32.2044 7.59508C33.3723 8.40939 34.2842 9.53945 34.8334 10.8531C35.3826 12.1667 35.5464 13.6095 35.3055 15.0128ZM14.2424 21.9419L10.8752 19.9981C10.8576 19.9893 10.8423 19.9763 10.8309 19.9602C10.8195 19.9441 10.8122 19.9254 10.8098 19.9058V10.6071C10.8107 9.18295 11.2173 7.78848 11.9819 6.58696C12.7466 5.38544 13.8377 4.42659 15.1275 3.82264C16.4173 3.21869 17.8524 2.99464 19.2649 3.1767C20.6775 3.35876 22.0089 3.93941 23.1034 4.85067C23.0427 4.88379 22.937 4.94215 22.8668 4.98473L14.9024 9.58517C14.7025 9.69878 14.5366 9.86356 14.4215 10.0626C14.3065 10.2616 14.2466 10.4877 14.2479 10.7175L14.2424 21.9419ZM16.071 17.9991L20.4018 15.4978L24.7325 17.9975V22.9985L20.4018 25.4983L16.071 22.9985V17.9991Z"
+                                                    fill="currentColor"></path>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="assistant"
+                                        data-message-id="8a4a6949-766d-4075-b386-5cd1f246d8fc" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]">
+                                            <div class="markdown prose w-full break-words dark:prose-invert dark">
+                                                <p>To convert the linear regression problem to a
+                                                    <strong>Streamlit</strong> app without using
+                                                    <strong>Matplotlib</strong>, we can use <strong>Plotly</strong> for
+                                                    the visualizations. Streamlit is a powerful tool for creating
+                                                    interactive web applications, and Plotly provides highly interactive
+                                                    charts that are well-suited for integration with Streamlit.</p>
+                                                <p>Here’s how to convert the code into a Streamlit app:</p>
+                                                <h3>Steps to Convert:</h3>
+                                                <ol>
+                                                    <li>
+                                                        <p>Install the required libraries:</p>
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9"></div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs">pip install streamlit scikit-learn plotly
+</code></div></div></pre>
+                                                    </li>
+                                                    <li>
+                                                        <p>Update the Python script to use Streamlit and Plotly.</p>
+                                                    </li>
+                                                </ol>
+                                                <h3>Streamlit Code Example:</h3>
+                                                <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">python</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> plotly.express <span class="hljs-keyword">as</span> px
+<span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
+<span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+<span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> mean_squared_error
+
+<span class="hljs-comment"># Title of the Streamlit App</span>
+st.title(<span class="hljs-string">"Linear Regression Example with Noise"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 1: Business Understanding</span>
+st.markdown(<span class="hljs-string">"""
+### Objective:
+This app models the relationship between `X` and `y` where `y = a * X + 50 + c * noise` using Linear Regression.
+The model estimates the coefficient `a`, the intercept, and evaluates the model performance.
+"""</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 2: Data Understanding - Generate synthetic data</span>
+np.random.seed(<span class="hljs-number">42</span>)  <span class="hljs-comment"># For reproducibility</span>
+n_samples = st.slider(<span class="hljs-string">"Number of Samples"</span>, min_value=<span class="hljs-number">100</span>, max_value=<span class="hljs-number">2000</span>, value=<span class="hljs-number">1000</span>, step=<span class="hljs-number">100</span>)
+a_true = st.slider(<span class="hljs-string">"True Coefficient (a)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">5.0</span>, value=<span class="hljs-number">2.0</span>)
+c_true = st.slider(<span class="hljs-string">"Noise Coefficient (c)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">3.0</span>, value=<span class="hljs-number">1.0</span>)
+X = np.random.rand(n_samples, <span class="hljs-number">1</span>) * <span class="hljs-number">10</span>  <span class="hljs-comment"># Random X values between 0 and 10</span>
+noise = np.random.randn(n_samples, <span class="hljs-number">1</span>)  <span class="hljs-comment"># Normally distributed noise</span>
+y = a_true * X + <span class="hljs-number">50</span> + c_true * noise
+
+<span class="hljs-comment"># CRISP-DM Step 3: Data Preparation - Split into training and test sets</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 4: Modeling - Train the Linear Regression model</span>
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+<span class="hljs-comment"># CRISP-DM Step 5: Evaluation - Predict on test set and evaluate</span>
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+
+<span class="hljs-comment"># Display the model results</span>
+st.write(<span class="hljs-string">f"### Model Results:"</span>)
+st.write(<span class="hljs-string">f"Estimated Coefficient (a): <span class="hljs-subst">{model.coef_[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]}</span>"</span>)
+st.write(<span class="hljs-string">f"Intercept: <span class="hljs-subst">{model.intercept_[<span class="hljs-number">0</span>]}</span>"</span>)
+st.write(<span class="hljs-string">f"Mean Squared Error (MSE): <span class="hljs-subst">{mse}</span>"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 5 (cont.): Visualize the predictions with Plotly</span>
+fig = go.Figure()
+
+<span class="hljs-comment"># Add scatter plot for actual test data</span>
+fig.add_trace(go.Scatter(x=X_test.flatten(), y=y_test.flatten(),
+                         mode=<span class="hljs-string">'markers'</span>, name=<span class="hljs-string">'True Values'</span>, marker=<span class="hljs-built_in">dict</span>(color=<span class="hljs-string">'blue'</span>)))
+
+<span class="hljs-comment"># Add line plot for predicted data</span>
+fig.add_trace(go.Scatter(x=X_test.flatten(), y=y_pred.flatten(),
+                         mode=<span class="hljs-string">'lines'</span>, name=<span class="hljs-string">'Predicted Values'</span>, line=<span class="hljs-built_in">dict</span>(color=<span class="hljs-string">'red'</span>, width=<span class="hljs-number">2</span>)))
+
+<span class="hljs-comment"># Update the layout of the plot</span>
+fig.update_layout(title=<span class="hljs-string">"Linear Regression Predictions"</span>,
+                  xaxis_title=<span class="hljs-string">"X"</span>,
+                  yaxis_title=<span class="hljs-string">"y"</span>,
+                  legend_title=<span class="hljs-string">"Legend"</span>)
+
+<span class="hljs-comment"># Display the plot</span>
+st.plotly_chart(fig)
+
+<span class="hljs-comment"># CRISP-DM Step 6: Deployment - In real-world cases, you might save the model for future use.</span>
+</code></div></div></pre>
+                                                <h3>How it works:</h3>
+                                                <ol>
+                                                    <li>
+                                                        <p><strong>Streamlit Widgets</strong>:</p>
+                                                        <ul>
+                                                            <li>Sliders allow the user to adjust the number of samples
+                                                                (<code>n_samples</code>), the true coefficient
+                                                                (<code>a_true</code>), and the noise coefficient
+                                                                (<code>c_true</code>) interactively.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Plotly Visualization</strong>:</p>
+                                                        <ul>
+                                                            <li>Plotly is used to create an interactive scatter plot for
+                                                                the actual values (<code>y_test</code>) and a line plot
+                                                                for the predicted values (<code>y_pred</code>). The
+                                                                graph updates based on the selected parameters.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Evaluation Metrics</strong>:</p>
+                                                        <ul>
+                                                            <li>The estimated coefficient (<code>a</code>), intercept,
+                                                                and the Mean Squared Error (MSE) are displayed
+                                                                dynamically.</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                                <h3>To Run the App:</h3>
+                                                <ol>
+                                                    <li>Save the code in a file (e.g.,
+                                                        <code>linear_regression_app.py</code>).</li>
+                                                    <li>Open a terminal and run:
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">arduino</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-arduino">streamlit run linear_regression_app.py
+</code></div></div></pre>
+                                                    </li>
+                                                </ol>
+                                                <p>This will launch a local web server where you can interact with the
+                                                    linear regression model and adjust the parameters in real time!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-6" data-scroll-anchor="false">
+                <h5 class="sr-only">你說：</h5>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="user"
+                                        data-message-id="aaa280e8-b3bf-48a2-86a0-663d9b98b119" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start">
+                                            <div
+                                                class="relative max-w-[70%] rounded-3xl px-5 py-2.5 bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
+                                                <div class="whitespace-pre-wrap">allow user input parameter a from 0 to
+                                                    100, c from 0 to 100, c from 0 to 500</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-7" data-scroll-anchor="false">
+                <h6 class="sr-only">ChatGPT 說：</h6>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="flex-shrink-0 flex flex-col relative items-end">
+                            <div>
+                                <div class="pt-0">
+                                    <div
+                                        class="gizmo-bot-avatar flex h-8 w-8 items-center justify-center overflow-hidden rounded-full">
+                                        <div
+                                            class="relative p-1 rounded-sm flex items-center justify-center bg-token-main-surface-primary text-token-text-primary h-8 w-8">
+                                            <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="icon-md" role="img"><text
+                                                    x="-9999" y="-9999">ChatGPT</text>
+                                                <path
+                                                    d="M37.5324 16.8707C37.9808 15.5241 38.1363 14.0974 37.9886 12.6859C37.8409 11.2744 37.3934 9.91076 36.676 8.68622C35.6126 6.83404 33.9882 5.3676 32.0373 4.4985C30.0864 3.62941 27.9098 3.40259 25.8215 3.85078C24.8796 2.7893 23.7219 1.94125 22.4257 1.36341C21.1295 0.785575 19.7249 0.491269 18.3058 0.500197C16.1708 0.495044 14.0893 1.16803 12.3614 2.42214C10.6335 3.67624 9.34853 5.44666 8.6917 7.47815C7.30085 7.76286 5.98686 8.3414 4.8377 9.17505C3.68854 10.0087 2.73073 11.0782 2.02839 12.312C0.956464 14.1591 0.498905 16.2988 0.721698 18.4228C0.944492 20.5467 1.83612 22.5449 3.268 24.1293C2.81966 25.4759 2.66413 26.9026 2.81182 28.3141C2.95951 29.7256 3.40701 31.0892 4.12437 32.3138C5.18791 34.1659 6.8123 35.6322 8.76321 36.5013C10.7141 37.3704 12.8907 37.5973 14.9789 37.1492C15.9208 38.2107 17.0786 39.0587 18.3747 39.6366C19.6709 40.2144 21.0755 40.5087 22.4946 40.4998C24.6307 40.5054 26.7133 39.8321 28.4418 38.5772C30.1704 37.3223 31.4556 35.5506 32.1119 33.5179C33.5027 33.2332 34.8167 32.6547 35.9659 31.821C37.115 30.9874 38.0728 29.9178 38.7752 28.684C39.8458 26.8371 40.3023 24.6979 40.0789 22.5748C39.8556 20.4517 38.9639 18.4544 37.5324 16.8707ZM22.4978 37.8849C20.7443 37.8874 19.0459 37.2733 17.6994 36.1501C17.7601 36.117 17.8666 36.0586 17.936 36.0161L25.9004 31.4156C26.1003 31.3019 26.2663 31.137 26.3813 30.9378C26.4964 30.7386 26.5563 30.5124 26.5549 30.2825V19.0542L29.9213 20.998C29.9389 21.0068 29.9541 21.0198 29.9656 21.0359C29.977 21.052 29.9842 21.0707 29.9867 21.0902V30.3889C29.9842 32.375 29.1946 34.2791 27.7909 35.6841C26.3872 37.0892 24.4838 37.8806 22.4978 37.8849ZM6.39227 31.0064C5.51397 29.4888 5.19742 27.7107 5.49804 25.9832C5.55718 26.0187 5.66048 26.0818 5.73461 26.1244L13.699 30.7248C13.8975 30.8408 14.1233 30.902 14.3532 30.902C14.583 30.902 14.8088 30.8408 15.0073 30.7248L24.731 25.1103V28.9979C24.7321 29.0177 24.7283 29.0376 24.7199 29.0556C24.7115 29.0736 24.6988 29.0893 24.6829 29.1012L16.6317 33.7497C14.9096 34.7416 12.8643 35.0097 10.9447 34.4954C9.02506 33.9811 7.38785 32.7263 6.39227 31.0064ZM4.29707 13.6194C5.17156 12.0998 6.55279 10.9364 8.19885 10.3327C8.19885 10.4013 8.19491 10.5228 8.19491 10.6071V19.808C8.19351 20.0378 8.25334 20.2638 8.36823 20.4629C8.48312 20.6619 8.64893 20.8267 8.84863 20.9404L18.5723 26.5542L15.206 28.4979C15.1894 28.5089 15.1703 28.5155 15.1505 28.5173C15.1307 28.5191 15.1107 28.516 15.0924 28.5082L7.04046 23.8557C5.32135 22.8601 4.06716 21.2235 3.55289 19.3046C3.03862 17.3858 3.30624 15.3413 4.29707 13.6194ZM31.955 20.0556L22.2312 14.4411L25.5976 12.4981C25.6142 12.4872 25.6333 12.4805 25.6531 12.4787C25.6729 12.4769 25.6928 12.4801 25.7111 12.4879L33.7631 17.1364C34.9967 17.849 36.0017 18.8982 36.6606 20.1613C37.3194 21.4244 37.6047 22.849 37.4832 24.2684C37.3617 25.6878 36.8382 27.0432 35.9743 28.1759C35.1103 29.3086 33.9415 30.1717 32.6047 30.6641C32.6047 30.5947 32.6047 30.4733 32.6047 30.3889V21.188C32.6066 20.9586 32.5474 20.7328 32.4332 20.5338C32.319 20.3348 32.154 20.1698 31.955 20.0556ZM35.3055 15.0128C35.2464 14.9765 35.1431 14.9142 35.069 14.8717L27.1045 10.2712C26.906 10.1554 26.6803 10.0943 26.4504 10.0943C26.2206 10.0943 25.9948 10.1554 25.7963 10.2712L16.0726 15.8858V11.9982C16.0715 11.9783 16.0753 11.9585 16.0837 11.9405C16.0921 11.9225 16.1048 11.9068 16.1207 11.8949L24.1719 7.25025C25.4053 6.53903 26.8158 6.19376 28.2383 6.25482C29.6608 6.31589 31.0364 6.78077 32.2044 7.59508C33.3723 8.40939 34.2842 9.53945 34.8334 10.8531C35.3826 12.1667 35.5464 13.6095 35.3055 15.0128ZM14.2424 21.9419L10.8752 19.9981C10.8576 19.9893 10.8423 19.9763 10.8309 19.9602C10.8195 19.9441 10.8122 19.9254 10.8098 19.9058V10.6071C10.8107 9.18295 11.2173 7.78848 11.9819 6.58696C12.7466 5.38544 13.8377 4.42659 15.1275 3.82264C16.4173 3.21869 17.8524 2.99464 19.2649 3.1767C20.6775 3.35876 22.0089 3.93941 23.1034 4.85067C23.0427 4.88379 22.937 4.94215 22.8668 4.98473L14.9024 9.58517C14.7025 9.69878 14.5366 9.86356 14.4215 10.0626C14.3065 10.2616 14.2466 10.4877 14.2479 10.7175L14.2424 21.9419ZM16.071 17.9991L20.4018 15.4978L24.7325 17.9975V22.9985L20.4018 25.4983L16.071 22.9985V17.9991Z"
+                                                    fill="currentColor"></path>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="assistant"
+                                        data-message-id="3d49d9f4-aab4-4145-b7f9-5e5ed67c2701" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]">
+                                            <div class="markdown prose w-full break-words dark:prose-invert dark">
+                                                <p>To allow user input for parameters <span class="katex"><span
+                                                            class="katex-mathml"><math
+                                                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                <semantics>
+                                                                    <mrow>
+                                                                        <mi>a</mi>
+                                                                    </mrow>
+                                                                    <annotation encoding="application/x-tex">a
+                                                                    </annotation>
+                                                                </semantics>
+                                                            </math></span><span class="katex-html"
+                                                            aria-hidden="true"><span class="base"><span class="strut"
+                                                                    style="height: 0.4306em;"></span><span
+                                                                    class="mord mathnormal">a</span></span></span></span>,
+                                                    <span class="katex"><span class="katex-mathml"><math
+                                                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                <semantics>
+                                                                    <mrow>
+                                                                        <mi>c</mi>
+                                                                    </mrow>
+                                                                    <annotation encoding="application/x-tex">c
+                                                                    </annotation>
+                                                                </semantics>
+                                                            </math></span><span class="katex-html"
+                                                            aria-hidden="true"><span class="base"><span class="strut"
+                                                                    style="height: 0.4306em;"></span><span
+                                                                    class="mord mathnormal">c</span></span></span></span>,
+                                                    and the noise offset with the specified ranges in the Streamlit app,
+                                                    you can modify the sliders accordingly. Here’s the updated code:</p>
+                                                <h3>Updated Streamlit Code Example:</h3>
+                                                <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">python</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> plotly.express <span class="hljs-keyword">as</span> px
+<span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
+<span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+<span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> mean_squared_error
+
+<span class="hljs-comment"># Title of the Streamlit App</span>
+st.title(<span class="hljs-string">"Linear Regression Example with Noise"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 1: Business Understanding</span>
+st.markdown(<span class="hljs-string">"""
+### Objective:
+This app models the relationship between `X` and `y` where `y = a * X + 50 + c * noise` using Linear Regression.
+The model estimates the coefficient `a`, the intercept, and evaluates the model performance.
+"""</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 2: Data Understanding - Generate synthetic data</span>
+np.random.seed(<span class="hljs-number">42</span>)  <span class="hljs-comment"># For reproducibility</span>
+n_samples = st.slider(<span class="hljs-string">"Number of Samples"</span>, min_value=<span class="hljs-number">100</span>, max_value=<span class="hljs-number">2000</span>, value=<span class="hljs-number">1000</span>, step=<span class="hljs-number">100</span>)
+a_true = st.slider(<span class="hljs-string">"True Coefficient (a)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">100.0</span>, value=<span class="hljs-number">2.0</span>)
+c_true = st.slider(<span class="hljs-string">"Noise Coefficient (c)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">100.0</span>, value=<span class="hljs-number">1.0</span>)
+noise_scale = st.slider(<span class="hljs-string">"Noise Scale (c * noise)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">500.0</span>, value=<span class="hljs-number">100.0</span>)
+
+X = np.random.rand(n_samples, <span class="hljs-number">1</span>) * <span class="hljs-number">10</span>  <span class="hljs-comment"># Random X values between 0 and 10</span>
+noise = np.random.randn(n_samples, <span class="hljs-number">1</span>) * noise_scale  <span class="hljs-comment"># Normally distributed noise scaled by noise_scale</span>
+y = a_true * X + <span class="hljs-number">50</span> + c_true * noise
+
+<span class="hljs-comment"># CRISP-DM Step 3: Data Preparation - Split into training and test sets</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 4: Modeling - Train the Linear Regression model</span>
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+<span class="hljs-comment"># CRISP-DM Step 5: Evaluation - Predict on test set and evaluate</span>
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+
+<span class="hljs-comment"># Display the model results</span>
+st.write(<span class="hljs-string">f"### Model Results:"</span>)
+st.write(<span class="hljs-string">f"Estimated Coefficient (a): <span class="hljs-subst">{model.coef_[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]:<span class="hljs-number">.2</span>f}</span>"</span>)
+st.write(<span class="hljs-string">f"Intercept: <span class="hljs-subst">{model.intercept_[<span class="hljs-number">0</span>]:<span class="hljs-number">.2</span>f}</span>"</span>)
+st.write(<span class="hljs-string">f"Mean Squared Error (MSE): <span class="hljs-subst">{mse:<span class="hljs-number">.2</span>f}</span>"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 5 (cont.): Visualize the predictions with Plotly</span>
+fig = go.Figure()
+
+<span class="hljs-comment"># Add scatter plot for actual test data</span>
+fig.add_trace(go.Scatter(x=X_test.flatten(), y=y_test.flatten(),
+                         mode=<span class="hljs-string">'markers'</span>, name=<span class="hljs-string">'True Values'</span>, marker=<span class="hljs-built_in">dict</span>(color=<span class="hljs-string">'blue'</span>)))
+
+<span class="hljs-comment"># Add line plot for predicted data</span>
+fig.add_trace(go.Scatter(x=X_test.flatten(), y=y_pred.flatten(),
+                         mode=<span class="hljs-string">'lines'</span>, name=<span class="hljs-string">'Predicted Values'</span>, line=<span class="hljs-built_in">dict</span>(color=<span class="hljs-string">'red'</span>, width=<span class="hljs-number">2</span>)))
+
+<span class="hljs-comment"># Update the layout of the plot</span>
+fig.update_layout(title=<span class="hljs-string">"Linear Regression Predictions"</span>,
+                  xaxis_title=<span class="hljs-string">"X"</span>,
+                  yaxis_title=<span class="hljs-string">"y"</span>,
+                  legend_title=<span class="hljs-string">"Legend"</span>)
+
+<span class="hljs-comment"># Display the plot</span>
+st.plotly_chart(fig)
+
+<span class="hljs-comment"># CRISP-DM Step 6: Deployment - In real-world cases, you might save the model for future use.</span>
+</code></div></div></pre>
+                                                <h3>Key Changes:</h3>
+                                                <ol>
+                                                    <li><strong>Slider for <code>a</code></strong>: The range for the
+                                                        coefficient <span class="katex"><span class="katex-mathml"><math
+                                                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                    <semantics>
+                                                                        <mrow>
+                                                                            <mi>a</mi>
+                                                                        </mrow>
+                                                                        <annotation encoding="application/x-tex">a
+                                                                        </annotation>
+                                                                    </semantics>
+                                                                </math></span><span class="katex-html"
+                                                                aria-hidden="true"><span class="base"><span
+                                                                        class="strut"
+                                                                        style="height: 0.4306em;"></span><span
+                                                                        class="mord mathnormal">a</span></span></span></span>
+                                                        is now from <strong>0 to 100</strong>.</li>
+                                                    <li><strong>Slider for <code>c</code></strong>: The range for the
+                                                        noise coefficient <span class="katex"><span
+                                                                class="katex-mathml"><math
+                                                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                    <semantics>
+                                                                        <mrow>
+                                                                            <mi>c</mi>
+                                                                        </mrow>
+                                                                        <annotation encoding="application/x-tex">c
+                                                                        </annotation>
+                                                                    </semantics>
+                                                                </math></span><span class="katex-html"
+                                                                aria-hidden="true"><span class="base"><span
+                                                                        class="strut"
+                                                                        style="height: 0.4306em;"></span><span
+                                                                        class="mord mathnormal">c</span></span></span></span>
+                                                        is also from <strong>0 to 100</strong>.</li>
+                                                    <li><strong>Slider for Noise Scale</strong>: Added a new slider for
+                                                        scaling the noise, ranging from <strong>0 to 500</strong>.</li>
+                                                </ol>
+                                                <h3>To Run the Updated App:</h3>
+                                                <ol>
+                                                    <li>Save the updated code in your Streamlit script (e.g.,
+                                                        <code>linear_regression_app.py</code>).</li>
+                                                    <li>Open a terminal and run:
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">streamlit run linear_regression_app.py
+</code></div></div></pre>
+                                                    </li>
+                                                </ol>
+                                                <p>This will launch the updated app with interactive sliders allowing
+                                                    you to adjust the parameters as specified. Let me know if you need
+                                                    any further modifications or assistance!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-8" data-scroll-anchor="false">
+                <h5 class="sr-only">你說：</h5>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="user"
+                                        data-message-id="aaa29ab5-dfb1-49eb-9d3e-f9741830f15b" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start">
+                                            <div
+                                                class="relative max-w-[70%] rounded-3xl px-5 py-2.5 bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
+                                                <div class="whitespace-pre-wrap">set input to right of view</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-9" data-scroll-anchor="false">
+                <h6 class="sr-only">ChatGPT 說：</h6>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="flex-shrink-0 flex flex-col relative items-end">
+                            <div>
+                                <div class="pt-0">
+                                    <div
+                                        class="gizmo-bot-avatar flex h-8 w-8 items-center justify-center overflow-hidden rounded-full">
+                                        <div
+                                            class="relative p-1 rounded-sm flex items-center justify-center bg-token-main-surface-primary text-token-text-primary h-8 w-8">
+                                            <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="icon-md" role="img"><text
+                                                    x="-9999" y="-9999">ChatGPT</text>
+                                                <path
+                                                    d="M37.5324 16.8707C37.9808 15.5241 38.1363 14.0974 37.9886 12.6859C37.8409 11.2744 37.3934 9.91076 36.676 8.68622C35.6126 6.83404 33.9882 5.3676 32.0373 4.4985C30.0864 3.62941 27.9098 3.40259 25.8215 3.85078C24.8796 2.7893 23.7219 1.94125 22.4257 1.36341C21.1295 0.785575 19.7249 0.491269 18.3058 0.500197C16.1708 0.495044 14.0893 1.16803 12.3614 2.42214C10.6335 3.67624 9.34853 5.44666 8.6917 7.47815C7.30085 7.76286 5.98686 8.3414 4.8377 9.17505C3.68854 10.0087 2.73073 11.0782 2.02839 12.312C0.956464 14.1591 0.498905 16.2988 0.721698 18.4228C0.944492 20.5467 1.83612 22.5449 3.268 24.1293C2.81966 25.4759 2.66413 26.9026 2.81182 28.3141C2.95951 29.7256 3.40701 31.0892 4.12437 32.3138C5.18791 34.1659 6.8123 35.6322 8.76321 36.5013C10.7141 37.3704 12.8907 37.5973 14.9789 37.1492C15.9208 38.2107 17.0786 39.0587 18.3747 39.6366C19.6709 40.2144 21.0755 40.5087 22.4946 40.4998C24.6307 40.5054 26.7133 39.8321 28.4418 38.5772C30.1704 37.3223 31.4556 35.5506 32.1119 33.5179C33.5027 33.2332 34.8167 32.6547 35.9659 31.821C37.115 30.9874 38.0728 29.9178 38.7752 28.684C39.8458 26.8371 40.3023 24.6979 40.0789 22.5748C39.8556 20.4517 38.9639 18.4544 37.5324 16.8707ZM22.4978 37.8849C20.7443 37.8874 19.0459 37.2733 17.6994 36.1501C17.7601 36.117 17.8666 36.0586 17.936 36.0161L25.9004 31.4156C26.1003 31.3019 26.2663 31.137 26.3813 30.9378C26.4964 30.7386 26.5563 30.5124 26.5549 30.2825V19.0542L29.9213 20.998C29.9389 21.0068 29.9541 21.0198 29.9656 21.0359C29.977 21.052 29.9842 21.0707 29.9867 21.0902V30.3889C29.9842 32.375 29.1946 34.2791 27.7909 35.6841C26.3872 37.0892 24.4838 37.8806 22.4978 37.8849ZM6.39227 31.0064C5.51397 29.4888 5.19742 27.7107 5.49804 25.9832C5.55718 26.0187 5.66048 26.0818 5.73461 26.1244L13.699 30.7248C13.8975 30.8408 14.1233 30.902 14.3532 30.902C14.583 30.902 14.8088 30.8408 15.0073 30.7248L24.731 25.1103V28.9979C24.7321 29.0177 24.7283 29.0376 24.7199 29.0556C24.7115 29.0736 24.6988 29.0893 24.6829 29.1012L16.6317 33.7497C14.9096 34.7416 12.8643 35.0097 10.9447 34.4954C9.02506 33.9811 7.38785 32.7263 6.39227 31.0064ZM4.29707 13.6194C5.17156 12.0998 6.55279 10.9364 8.19885 10.3327C8.19885 10.4013 8.19491 10.5228 8.19491 10.6071V19.808C8.19351 20.0378 8.25334 20.2638 8.36823 20.4629C8.48312 20.6619 8.64893 20.8267 8.84863 20.9404L18.5723 26.5542L15.206 28.4979C15.1894 28.5089 15.1703 28.5155 15.1505 28.5173C15.1307 28.5191 15.1107 28.516 15.0924 28.5082L7.04046 23.8557C5.32135 22.8601 4.06716 21.2235 3.55289 19.3046C3.03862 17.3858 3.30624 15.3413 4.29707 13.6194ZM31.955 20.0556L22.2312 14.4411L25.5976 12.4981C25.6142 12.4872 25.6333 12.4805 25.6531 12.4787C25.6729 12.4769 25.6928 12.4801 25.7111 12.4879L33.7631 17.1364C34.9967 17.849 36.0017 18.8982 36.6606 20.1613C37.3194 21.4244 37.6047 22.849 37.4832 24.2684C37.3617 25.6878 36.8382 27.0432 35.9743 28.1759C35.1103 29.3086 33.9415 30.1717 32.6047 30.6641C32.6047 30.5947 32.6047 30.4733 32.6047 30.3889V21.188C32.6066 20.9586 32.5474 20.7328 32.4332 20.5338C32.319 20.3348 32.154 20.1698 31.955 20.0556ZM35.3055 15.0128C35.2464 14.9765 35.1431 14.9142 35.069 14.8717L27.1045 10.2712C26.906 10.1554 26.6803 10.0943 26.4504 10.0943C26.2206 10.0943 25.9948 10.1554 25.7963 10.2712L16.0726 15.8858V11.9982C16.0715 11.9783 16.0753 11.9585 16.0837 11.9405C16.0921 11.9225 16.1048 11.9068 16.1207 11.8949L24.1719 7.25025C25.4053 6.53903 26.8158 6.19376 28.2383 6.25482C29.6608 6.31589 31.0364 6.78077 32.2044 7.59508C33.3723 8.40939 34.2842 9.53945 34.8334 10.8531C35.3826 12.1667 35.5464 13.6095 35.3055 15.0128ZM14.2424 21.9419L10.8752 19.9981C10.8576 19.9893 10.8423 19.9763 10.8309 19.9602C10.8195 19.9441 10.8122 19.9254 10.8098 19.9058V10.6071C10.8107 9.18295 11.2173 7.78848 11.9819 6.58696C12.7466 5.38544 13.8377 4.42659 15.1275 3.82264C16.4173 3.21869 17.8524 2.99464 19.2649 3.1767C20.6775 3.35876 22.0089 3.93941 23.1034 4.85067C23.0427 4.88379 22.937 4.94215 22.8668 4.98473L14.9024 9.58517C14.7025 9.69878 14.5366 9.86356 14.4215 10.0626C14.3065 10.2616 14.2466 10.4877 14.2479 10.7175L14.2424 21.9419ZM16.071 17.9991L20.4018 15.4978L24.7325 17.9975V22.9985L20.4018 25.4983L16.071 22.9985V17.9991Z"
+                                                    fill="currentColor"></path>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="assistant"
+                                        data-message-id="7888dab8-e328-4f1b-99cf-a36f8c9f5c6f" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]">
+                                            <div class="markdown prose w-full break-words dark:prose-invert dark">
+                                                <p>To position the input sliders to the right side of the Streamlit app,
+                                                    you can utilize Streamlit's layout features. Specifically, you can
+                                                    use columns to arrange the components as desired. Here's how you can
+                                                    modify the code to achieve that:</p>
+                                                <h3>Updated Streamlit Code with Right-Aligned Inputs:</h3>
+                                                <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">python</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
+<span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+<span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> mean_squared_error
+
+<span class="hljs-comment"># Title of the Streamlit App</span>
+st.title(<span class="hljs-string">"Linear Regression Example with Noise"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 1: Business Understanding</span>
+st.markdown(<span class="hljs-string">"""
+### Objective:
+This app models the relationship between `X` and `y` where `y = a * X + 50 + c * noise` using Linear Regression.
+The model estimates the coefficient `a`, the intercept, and evaluates the model performance.
+"""</span>)
+
+<span class="hljs-comment"># Create two columns for layout</span>
+col1, col2 = st.columns([<span class="hljs-number">2</span>, <span class="hljs-number">1</span>])  <span class="hljs-comment"># Adjust the ratio as needed</span>
+
+<span class="hljs-comment"># Place the inputs in the right column</span>
+<span class="hljs-keyword">with</span> col2:
+    st.header(<span class="hljs-string">"Parameters"</span>)
+    n_samples = st.slider(<span class="hljs-string">"Number of Samples"</span>, min_value=<span class="hljs-number">100</span>, max_value=<span class="hljs-number">2000</span>, value=<span class="hljs-number">1000</span>, step=<span class="hljs-number">100</span>)
+    a_true = st.slider(<span class="hljs-string">"True Coefficient (a)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">100.0</span>, value=<span class="hljs-number">2.0</span>)
+    c_true = st.slider(<span class="hljs-string">"Noise Coefficient (c)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">100.0</span>, value=<span class="hljs-number">1.0</span>)
+    noise_scale = st.slider(<span class="hljs-string">"Noise Scale (c * noise)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">500.0</span>, value=<span class="hljs-number">100.0</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 2: Data Understanding - Generate synthetic data</span>
+np.random.seed(<span class="hljs-number">42</span>)  <span class="hljs-comment"># For reproducibility</span>
+X = np.random.rand(n_samples, <span class="hljs-number">1</span>) * <span class="hljs-number">10</span>  <span class="hljs-comment"># Random X values between 0 and 10</span>
+noise = np.random.randn(n_samples, <span class="hljs-number">1</span>) * noise_scale  <span class="hljs-comment"># Normally distributed noise scaled by noise_scale</span>
+y = a_true * X + <span class="hljs-number">50</span> + c_true * noise
+
+<span class="hljs-comment"># CRISP-DM Step 3: Data Preparation - Split into training and test sets</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 4: Modeling - Train the Linear Regression model</span>
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+<span class="hljs-comment"># CRISP-DM Step 5: Evaluation - Predict on test set and evaluate</span>
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+
+<span class="hljs-comment"># Display the model results</span>
+st.write(<span class="hljs-string">f"### Model Results:"</span>)
+st.write(<span class="hljs-string">f"Estimated Coefficient (a): <span class="hljs-subst">{model.coef_[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]:<span class="hljs-number">.2</span>f}</span>"</span>)
+st.write(<span class="hljs-string">f"Intercept: <span class="hljs-subst">{model.intercept_[<span class="hljs-number">0</span>]:<span class="hljs-number">.2</span>f}</span>"</span>)
+st.write(<span class="hljs-string">f"Mean Squared Error (MSE): <span class="hljs-subst">{mse:<span class="hljs-number">.2</span>f}</span>"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 5 (cont.): Visualize the predictions with Plotly</span>
+fig = go.Figure()
+
+<span class="hljs-comment"># Add scatter plot for actual test data</span>
+fig.add_trace(go.Scatter(x=X_test.flatten(), y=y_test.flatten(),
+                         mode=<span class="hljs-string">'markers'</span>, name=<span class="hljs-string">'True Values'</span>, marker=<span class="hljs-built_in">dict</span>(color=<span class="hljs-string">'blue'</span>)))
+
+<span class="hljs-comment"># Add line plot for predicted data</span>
+fig.add_trace(go.Scatter(x=X_test.flatten(), y=y_pred.flatten(),
+                         mode=<span class="hljs-string">'lines'</span>, name=<span class="hljs-string">'Predicted Values'</span>, line=<span class="hljs-built_in">dict</span>(color=<span class="hljs-string">'red'</span>, width=<span class="hljs-number">2</span>)))
+
+<span class="hljs-comment"># Update the layout of the plot</span>
+fig.update_layout(title=<span class="hljs-string">"Linear Regression Predictions"</span>,
+                  xaxis_title=<span class="hljs-string">"X"</span>,
+                  yaxis_title=<span class="hljs-string">"y"</span>,
+                  legend_title=<span class="hljs-string">"Legend"</span>)
+
+<span class="hljs-comment"># Display the plot</span>
+st.plotly_chart(fig)
+
+<span class="hljs-comment"># CRISP-DM Step 6: Deployment - In real-world cases, you might save the model for future use.</span>
+</code></div></div></pre>
+                                                <h3>Key Changes:</h3>
+                                                <ol>
+                                                    <li>
+                                                        <p><strong>Columns for Layout</strong>:</p>
+                                                        <ul>
+                                                            <li>Created two columns using <code>st.columns()</code>,
+                                                                where the first column is wider (2 parts) and the second
+                                                                column is narrower (1 part).</li>
+                                                            <li>Placed the input sliders in the right column
+                                                                (<code>col2</code>).</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Parameter Header</strong>:</p>
+                                                        <ul>
+                                                            <li>Added a header to the right column for clarity.</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                                <h3>Running the App:</h3>
+                                                <ol>
+                                                    <li>Save the updated code in your Streamlit script (e.g.,
+                                                        <code>linear_regression_app.py</code>).</li>
+                                                    <li>Open a terminal and run:
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">streamlit run linear_regression_app.py
+</code></div></div></pre>
+                                                    </li>
+                                                </ol>
+                                                <p>This will display the input sliders on the right side of the app,
+                                                    making for a cleaner layout. Let me know if you need any further
+                                                    adjustments!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-10" data-scroll-anchor="false">
+                <h5 class="sr-only">你說：</h5>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="user"
+                                        data-message-id="aaa28764-e6a7-4828-a3e1-1b762b604e27" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start">
+                                            <div
+                                                class="relative max-w-[70%] rounded-3xl px-5 py-2.5 bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
+                                                <div class="whitespace-pre-wrap">set input to right of whole view</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-11" data-scroll-anchor="false">
+                <h6 class="sr-only">ChatGPT 說：</h6>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="flex-shrink-0 flex flex-col relative items-end">
+                            <div>
+                                <div class="pt-0">
+                                    <div
+                                        class="gizmo-bot-avatar flex h-8 w-8 items-center justify-center overflow-hidden rounded-full">
+                                        <div
+                                            class="relative p-1 rounded-sm flex items-center justify-center bg-token-main-surface-primary text-token-text-primary h-8 w-8">
+                                            <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="icon-md" role="img"><text
+                                                    x="-9999" y="-9999">ChatGPT</text>
+                                                <path
+                                                    d="M37.5324 16.8707C37.9808 15.5241 38.1363 14.0974 37.9886 12.6859C37.8409 11.2744 37.3934 9.91076 36.676 8.68622C35.6126 6.83404 33.9882 5.3676 32.0373 4.4985C30.0864 3.62941 27.9098 3.40259 25.8215 3.85078C24.8796 2.7893 23.7219 1.94125 22.4257 1.36341C21.1295 0.785575 19.7249 0.491269 18.3058 0.500197C16.1708 0.495044 14.0893 1.16803 12.3614 2.42214C10.6335 3.67624 9.34853 5.44666 8.6917 7.47815C7.30085 7.76286 5.98686 8.3414 4.8377 9.17505C3.68854 10.0087 2.73073 11.0782 2.02839 12.312C0.956464 14.1591 0.498905 16.2988 0.721698 18.4228C0.944492 20.5467 1.83612 22.5449 3.268 24.1293C2.81966 25.4759 2.66413 26.9026 2.81182 28.3141C2.95951 29.7256 3.40701 31.0892 4.12437 32.3138C5.18791 34.1659 6.8123 35.6322 8.76321 36.5013C10.7141 37.3704 12.8907 37.5973 14.9789 37.1492C15.9208 38.2107 17.0786 39.0587 18.3747 39.6366C19.6709 40.2144 21.0755 40.5087 22.4946 40.4998C24.6307 40.5054 26.7133 39.8321 28.4418 38.5772C30.1704 37.3223 31.4556 35.5506 32.1119 33.5179C33.5027 33.2332 34.8167 32.6547 35.9659 31.821C37.115 30.9874 38.0728 29.9178 38.7752 28.684C39.8458 26.8371 40.3023 24.6979 40.0789 22.5748C39.8556 20.4517 38.9639 18.4544 37.5324 16.8707ZM22.4978 37.8849C20.7443 37.8874 19.0459 37.2733 17.6994 36.1501C17.7601 36.117 17.8666 36.0586 17.936 36.0161L25.9004 31.4156C26.1003 31.3019 26.2663 31.137 26.3813 30.9378C26.4964 30.7386 26.5563 30.5124 26.5549 30.2825V19.0542L29.9213 20.998C29.9389 21.0068 29.9541 21.0198 29.9656 21.0359C29.977 21.052 29.9842 21.0707 29.9867 21.0902V30.3889C29.9842 32.375 29.1946 34.2791 27.7909 35.6841C26.3872 37.0892 24.4838 37.8806 22.4978 37.8849ZM6.39227 31.0064C5.51397 29.4888 5.19742 27.7107 5.49804 25.9832C5.55718 26.0187 5.66048 26.0818 5.73461 26.1244L13.699 30.7248C13.8975 30.8408 14.1233 30.902 14.3532 30.902C14.583 30.902 14.8088 30.8408 15.0073 30.7248L24.731 25.1103V28.9979C24.7321 29.0177 24.7283 29.0376 24.7199 29.0556C24.7115 29.0736 24.6988 29.0893 24.6829 29.1012L16.6317 33.7497C14.9096 34.7416 12.8643 35.0097 10.9447 34.4954C9.02506 33.9811 7.38785 32.7263 6.39227 31.0064ZM4.29707 13.6194C5.17156 12.0998 6.55279 10.9364 8.19885 10.3327C8.19885 10.4013 8.19491 10.5228 8.19491 10.6071V19.808C8.19351 20.0378 8.25334 20.2638 8.36823 20.4629C8.48312 20.6619 8.64893 20.8267 8.84863 20.9404L18.5723 26.5542L15.206 28.4979C15.1894 28.5089 15.1703 28.5155 15.1505 28.5173C15.1307 28.5191 15.1107 28.516 15.0924 28.5082L7.04046 23.8557C5.32135 22.8601 4.06716 21.2235 3.55289 19.3046C3.03862 17.3858 3.30624 15.3413 4.29707 13.6194ZM31.955 20.0556L22.2312 14.4411L25.5976 12.4981C25.6142 12.4872 25.6333 12.4805 25.6531 12.4787C25.6729 12.4769 25.6928 12.4801 25.7111 12.4879L33.7631 17.1364C34.9967 17.849 36.0017 18.8982 36.6606 20.1613C37.3194 21.4244 37.6047 22.849 37.4832 24.2684C37.3617 25.6878 36.8382 27.0432 35.9743 28.1759C35.1103 29.3086 33.9415 30.1717 32.6047 30.6641C32.6047 30.5947 32.6047 30.4733 32.6047 30.3889V21.188C32.6066 20.9586 32.5474 20.7328 32.4332 20.5338C32.319 20.3348 32.154 20.1698 31.955 20.0556ZM35.3055 15.0128C35.2464 14.9765 35.1431 14.9142 35.069 14.8717L27.1045 10.2712C26.906 10.1554 26.6803 10.0943 26.4504 10.0943C26.2206 10.0943 25.9948 10.1554 25.7963 10.2712L16.0726 15.8858V11.9982C16.0715 11.9783 16.0753 11.9585 16.0837 11.9405C16.0921 11.9225 16.1048 11.9068 16.1207 11.8949L24.1719 7.25025C25.4053 6.53903 26.8158 6.19376 28.2383 6.25482C29.6608 6.31589 31.0364 6.78077 32.2044 7.59508C33.3723 8.40939 34.2842 9.53945 34.8334 10.8531C35.3826 12.1667 35.5464 13.6095 35.3055 15.0128ZM14.2424 21.9419L10.8752 19.9981C10.8576 19.9893 10.8423 19.9763 10.8309 19.9602C10.8195 19.9441 10.8122 19.9254 10.8098 19.9058V10.6071C10.8107 9.18295 11.2173 7.78848 11.9819 6.58696C12.7466 5.38544 13.8377 4.42659 15.1275 3.82264C16.4173 3.21869 17.8524 2.99464 19.2649 3.1767C20.6775 3.35876 22.0089 3.93941 23.1034 4.85067C23.0427 4.88379 22.937 4.94215 22.8668 4.98473L14.9024 9.58517C14.7025 9.69878 14.5366 9.86356 14.4215 10.0626C14.3065 10.2616 14.2466 10.4877 14.2479 10.7175L14.2424 21.9419ZM16.071 17.9991L20.4018 15.4978L24.7325 17.9975V22.9985L20.4018 25.4983L16.071 22.9985V17.9991Z"
+                                                    fill="currentColor"></path>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="assistant"
+                                        data-message-id="d861f9d6-df3d-4775-8c54-770cd4dea232" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]">
+                                            <div class="markdown prose w-full break-words dark:prose-invert dark">
+                                                <p>To set the input sliders to the right side of the entire Streamlit
+                                                    app view, you can utilize the <code>st.sidebar</code> feature. This
+                                                    will allow you to place all the input sliders in a sidebar, keeping
+                                                    the main content area clear for visualizations and results. Here’s
+                                                    how to update the code accordingly:</p>
+                                                <h3>Updated Streamlit Code with Sidebar for Inputs:</h3>
+                                                <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">python</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
+<span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+<span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> mean_squared_error
+
+<span class="hljs-comment"># Title of the Streamlit App</span>
+st.title(<span class="hljs-string">"Linear Regression Example with Noise"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 1: Business Understanding</span>
+st.markdown(<span class="hljs-string">"""
+### Objective:
+This app models the relationship between `X` and `y` where `y = a * X + 50 + c * noise` using Linear Regression.
+The model estimates the coefficient `a`, the intercept, and evaluates the model performance.
+"""</span>)
+
+<span class="hljs-comment"># Create a sidebar for inputs</span>
+st.sidebar.header(<span class="hljs-string">"Parameters"</span>)
+
+n_samples = st.sidebar.slider(<span class="hljs-string">"Number of Samples"</span>, min_value=<span class="hljs-number">100</span>, max_value=<span class="hljs-number">2000</span>, value=<span class="hljs-number">1000</span>, step=<span class="hljs-number">100</span>)
+a_true = st.sidebar.slider(<span class="hljs-string">"True Coefficient (a)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">100.0</span>, value=<span class="hljs-number">2.0</span>)
+c_true = st.sidebar.slider(<span class="hljs-string">"Noise Coefficient (c)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">100.0</span>, value=<span class="hljs-number">1.0</span>)
+noise_scale = st.sidebar.slider(<span class="hljs-string">"Noise Scale (c * noise)"</span>, min_value=<span class="hljs-number">0.0</span>, max_value=<span class="hljs-number">500.0</span>, value=<span class="hljs-number">100.0</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 2: Data Understanding - Generate synthetic data</span>
+np.random.seed(<span class="hljs-number">42</span>)  <span class="hljs-comment"># For reproducibility</span>
+X = np.random.rand(n_samples, <span class="hljs-number">1</span>) * <span class="hljs-number">10</span>  <span class="hljs-comment"># Random X values between 0 and 10</span>
+noise = np.random.randn(n_samples, <span class="hljs-number">1</span>) * noise_scale  <span class="hljs-comment"># Normally distributed noise scaled by noise_scale</span>
+y = a_true * X + <span class="hljs-number">50</span> + c_true * noise
+
+<span class="hljs-comment"># CRISP-DM Step 3: Data Preparation - Split into training and test sets</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 4: Modeling - Train the Linear Regression model</span>
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+<span class="hljs-comment"># CRISP-DM Step 5: Evaluation - Predict on test set and evaluate</span>
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+
+<span class="hljs-comment"># Display the model results</span>
+st.write(<span class="hljs-string">f"### Model Results:"</span>)
+st.write(<span class="hljs-string">f"Estimated Coefficient (a): <span class="hljs-subst">{model.coef_[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]:<span class="hljs-number">.2</span>f}</span>"</span>)
+st.write(<span class="hljs-string">f"Intercept: <span class="hljs-subst">{model.intercept_[<span class="hljs-number">0</span>]:<span class="hljs-number">.2</span>f}</span>"</span>)
+st.write(<span class="hljs-string">f"Mean Squared Error (MSE): <span class="hljs-subst">{mse:<span class="hljs-number">.2</span>f}</span>"</span>)
+
+<span class="hljs-comment"># CRISP-DM Step 5 (cont.): Visualize the predictions with Plotly</span>
+fig = go.Figure()
+
+<span class="hljs-comment"># Add scatter plot for actual test data</span>
+fig.add_trace(go.Scatter(x=X_test.flatten(), y=y_test.flatten(),
+                         mode=<span class="hljs-string">'markers'</span>, name=<span class="hljs-string">'True Values'</span>, marker=<span class="hljs-built_in">dict</span>(color=<span class="hljs-string">'blue'</span>)))
+
+<span class="hljs-comment"># Add line plot for predicted data</span>
+fig.add_trace(go.Scatter(x=X_test.flatten(), y=y_pred.flatten(),
+                         mode=<span class="hljs-string">'lines'</span>, name=<span class="hljs-string">'Predicted Values'</span>, line=<span class="hljs-built_in">dict</span>(color=<span class="hljs-string">'red'</span>, width=<span class="hljs-number">2</span>)))
+
+<span class="hljs-comment"># Update the layout of the plot</span>
+fig.update_layout(title=<span class="hljs-string">"Linear Regression Predictions"</span>,
+                  xaxis_title=<span class="hljs-string">"X"</span>,
+                  yaxis_title=<span class="hljs-string">"y"</span>,
+                  legend_title=<span class="hljs-string">"Legend"</span>)
+
+<span class="hljs-comment"># Display the plot</span>
+st.plotly_chart(fig)
+
+<span class="hljs-comment"># CRISP-DM Step 6: Deployment - In real-world cases, you might save the model for future use.</span>
+</code></div></div></pre>
+                                                <h3>Key Changes:</h3>
+                                                <ol>
+                                                    <li><strong>Sidebar for Inputs</strong>:<ul>
+                                                            <li>Used <code>st.sidebar</code> to create a sidebar that
+                                                                houses all the input sliders. This allows users to
+                                                                adjust parameters while keeping the main display area
+                                                                focused on visual output and results.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><strong>Parameter Header</strong>:<ul>
+                                                            <li>Added a header to the sidebar for clarity.</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                                <h3>Running the Updated App:</h3>
+                                                <ol>
+                                                    <li>Save the updated code in your Streamlit script (e.g.,
+                                                        <code>linear_regression_app.py</code>).</li>
+                                                    <li>Open a terminal and run:
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">streamlit run linear_regression_app.py
+</code></div></div></pre>
+                                                    </li>
+                                                </ol>
+                                                <p>This layout will provide a cleaner and more user-friendly interface,
+                                                    with inputs on the right side (in the sidebar) of the app. Let me
+                                                    know if you need any further adjustments or enhancements!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-12" data-scroll-anchor="false">
+                <h5 class="sr-only">你說：</h5>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="user"
+                                        data-message-id="aaa2eb41-4352-4fbb-ad60-1fff3cfef041" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start">
+                                            <div
+                                                class="relative max-w-[70%] rounded-3xl px-5 py-2.5 bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
+                                                <div class="whitespace-pre-wrap">give me whole prompt to readme format
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-13" data-scroll-anchor="false">
+                <h6 class="sr-only">ChatGPT 說：</h6>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="flex-shrink-0 flex flex-col relative items-end">
+                            <div>
+                                <div class="pt-0">
+                                    <div
+                                        class="gizmo-bot-avatar flex h-8 w-8 items-center justify-center overflow-hidden rounded-full">
+                                        <div
+                                            class="relative p-1 rounded-sm flex items-center justify-center bg-token-main-surface-primary text-token-text-primary h-8 w-8">
+                                            <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="icon-md" role="img"><text
+                                                    x="-9999" y="-9999">ChatGPT</text>
+                                                <path
+                                                    d="M37.5324 16.8707C37.9808 15.5241 38.1363 14.0974 37.9886 12.6859C37.8409 11.2744 37.3934 9.91076 36.676 8.68622C35.6126 6.83404 33.9882 5.3676 32.0373 4.4985C30.0864 3.62941 27.9098 3.40259 25.8215 3.85078C24.8796 2.7893 23.7219 1.94125 22.4257 1.36341C21.1295 0.785575 19.7249 0.491269 18.3058 0.500197C16.1708 0.495044 14.0893 1.16803 12.3614 2.42214C10.6335 3.67624 9.34853 5.44666 8.6917 7.47815C7.30085 7.76286 5.98686 8.3414 4.8377 9.17505C3.68854 10.0087 2.73073 11.0782 2.02839 12.312C0.956464 14.1591 0.498905 16.2988 0.721698 18.4228C0.944492 20.5467 1.83612 22.5449 3.268 24.1293C2.81966 25.4759 2.66413 26.9026 2.81182 28.3141C2.95951 29.7256 3.40701 31.0892 4.12437 32.3138C5.18791 34.1659 6.8123 35.6322 8.76321 36.5013C10.7141 37.3704 12.8907 37.5973 14.9789 37.1492C15.9208 38.2107 17.0786 39.0587 18.3747 39.6366C19.6709 40.2144 21.0755 40.5087 22.4946 40.4998C24.6307 40.5054 26.7133 39.8321 28.4418 38.5772C30.1704 37.3223 31.4556 35.5506 32.1119 33.5179C33.5027 33.2332 34.8167 32.6547 35.9659 31.821C37.115 30.9874 38.0728 29.9178 38.7752 28.684C39.8458 26.8371 40.3023 24.6979 40.0789 22.5748C39.8556 20.4517 38.9639 18.4544 37.5324 16.8707ZM22.4978 37.8849C20.7443 37.8874 19.0459 37.2733 17.6994 36.1501C17.7601 36.117 17.8666 36.0586 17.936 36.0161L25.9004 31.4156C26.1003 31.3019 26.2663 31.137 26.3813 30.9378C26.4964 30.7386 26.5563 30.5124 26.5549 30.2825V19.0542L29.9213 20.998C29.9389 21.0068 29.9541 21.0198 29.9656 21.0359C29.977 21.052 29.9842 21.0707 29.9867 21.0902V30.3889C29.9842 32.375 29.1946 34.2791 27.7909 35.6841C26.3872 37.0892 24.4838 37.8806 22.4978 37.8849ZM6.39227 31.0064C5.51397 29.4888 5.19742 27.7107 5.49804 25.9832C5.55718 26.0187 5.66048 26.0818 5.73461 26.1244L13.699 30.7248C13.8975 30.8408 14.1233 30.902 14.3532 30.902C14.583 30.902 14.8088 30.8408 15.0073 30.7248L24.731 25.1103V28.9979C24.7321 29.0177 24.7283 29.0376 24.7199 29.0556C24.7115 29.0736 24.6988 29.0893 24.6829 29.1012L16.6317 33.7497C14.9096 34.7416 12.8643 35.0097 10.9447 34.4954C9.02506 33.9811 7.38785 32.7263 6.39227 31.0064ZM4.29707 13.6194C5.17156 12.0998 6.55279 10.9364 8.19885 10.3327C8.19885 10.4013 8.19491 10.5228 8.19491 10.6071V19.808C8.19351 20.0378 8.25334 20.2638 8.36823 20.4629C8.48312 20.6619 8.64893 20.8267 8.84863 20.9404L18.5723 26.5542L15.206 28.4979C15.1894 28.5089 15.1703 28.5155 15.1505 28.5173C15.1307 28.5191 15.1107 28.516 15.0924 28.5082L7.04046 23.8557C5.32135 22.8601 4.06716 21.2235 3.55289 19.3046C3.03862 17.3858 3.30624 15.3413 4.29707 13.6194ZM31.955 20.0556L22.2312 14.4411L25.5976 12.4981C25.6142 12.4872 25.6333 12.4805 25.6531 12.4787C25.6729 12.4769 25.6928 12.4801 25.7111 12.4879L33.7631 17.1364C34.9967 17.849 36.0017 18.8982 36.6606 20.1613C37.3194 21.4244 37.6047 22.849 37.4832 24.2684C37.3617 25.6878 36.8382 27.0432 35.9743 28.1759C35.1103 29.3086 33.9415 30.1717 32.6047 30.6641C32.6047 30.5947 32.6047 30.4733 32.6047 30.3889V21.188C32.6066 20.9586 32.5474 20.7328 32.4332 20.5338C32.319 20.3348 32.154 20.1698 31.955 20.0556ZM35.3055 15.0128C35.2464 14.9765 35.1431 14.9142 35.069 14.8717L27.1045 10.2712C26.906 10.1554 26.6803 10.0943 26.4504 10.0943C26.2206 10.0943 25.9948 10.1554 25.7963 10.2712L16.0726 15.8858V11.9982C16.0715 11.9783 16.0753 11.9585 16.0837 11.9405C16.0921 11.9225 16.1048 11.9068 16.1207 11.8949L24.1719 7.25025C25.4053 6.53903 26.8158 6.19376 28.2383 6.25482C29.6608 6.31589 31.0364 6.78077 32.2044 7.59508C33.3723 8.40939 34.2842 9.53945 34.8334 10.8531C35.3826 12.1667 35.5464 13.6095 35.3055 15.0128ZM14.2424 21.9419L10.8752 19.9981C10.8576 19.9893 10.8423 19.9763 10.8309 19.9602C10.8195 19.9441 10.8122 19.9254 10.8098 19.9058V10.6071C10.8107 9.18295 11.2173 7.78848 11.9819 6.58696C12.7466 5.38544 13.8377 4.42659 15.1275 3.82264C16.4173 3.21869 17.8524 2.99464 19.2649 3.1767C20.6775 3.35876 22.0089 3.93941 23.1034 4.85067C23.0427 4.88379 22.937 4.94215 22.8668 4.98473L14.9024 9.58517C14.7025 9.69878 14.5366 9.86356 14.4215 10.0626C14.3065 10.2616 14.2466 10.4877 14.2479 10.7175L14.2424 21.9419ZM16.071 17.9991L20.4018 15.4978L24.7325 17.9975V22.9985L20.4018 25.4983L16.071 22.9985V17.9991Z"
+                                                    fill="currentColor"></path>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="assistant"
+                                        data-message-id="9da3bc58-ed77-4087-8f4d-e013ca0b74ac" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]">
+                                            <div class="markdown prose w-full break-words dark:prose-invert dark">
+                                                <p>Here’s a complete README format for your Streamlit linear regression
+                                                    application. You can customize it as needed:</p>
+                                                <hr>
+                                                <h1>Linear Regression Example with Noise</h1>
+                                                <h2>Overview</h2>
+                                                <p>This Streamlit app models the relationship between input variable
+                                                    <span class="katex"><span class="katex-mathml"><math
+                                                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                <semantics>
+                                                                    <mrow>
+                                                                        <mi>X</mi>
+                                                                    </mrow>
+                                                                    <annotation encoding="application/x-tex">X
+                                                                    </annotation>
+                                                                </semantics>
+                                                            </math></span><span class="katex-html"
+                                                            aria-hidden="true"><span class="base"><span class="strut"
+                                                                    style="height: 0.6833em;"></span><span
+                                                                    class="mord mathnormal"
+                                                                    style="margin-right: 0.07847em;">X</span></span></span></span>
+                                                    and output variable <span class="katex"><span
+                                                            class="katex-mathml"><math
+                                                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                <semantics>
+                                                                    <mrow>
+                                                                        <mi>y</mi>
+                                                                    </mrow>
+                                                                    <annotation encoding="application/x-tex">y
+                                                                    </annotation>
+                                                                </semantics>
+                                                            </math></span><span class="katex-html"
+                                                            aria-hidden="true"><span class="base"><span class="strut"
+                                                                    style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                                                    class="mord mathnormal"
+                                                                    style="margin-right: 0.03588em;">y</span></span></span></span>
+                                                    using the equation:</p><span class="katex-display"><span
+                                                        class="katex"><span class="katex-mathml"><math
+                                                                xmlns="http://www.w3.org/1998/Math/MathML"
+                                                                display="block">
+                                                                <semantics>
+                                                                    <mrow>
+                                                                        <mi>y</mi>
+                                                                        <mo>=</mo>
+                                                                        <mi>a</mi>
+                                                                        <mo>⋅</mo>
+                                                                        <mi>X</mi>
+                                                                        <mo>+</mo>
+                                                                        <mn>50</mn>
+                                                                        <mo>+</mo>
+                                                                        <mi>c</mi>
+                                                                        <mo>⋅</mo>
+                                                                        <mtext>noise</mtext>
+                                                                    </mrow>
+                                                                    <annotation encoding="application/x-tex">y = a \cdot
+                                                                        X + 50 + c \cdot \text{noise}</annotation>
+                                                                </semantics>
+                                                            </math></span><span class="katex-html"
+                                                            aria-hidden="true"><span class="base"><span class="strut"
+                                                                    style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                                                    class="mord mathnormal"
+                                                                    style="margin-right: 0.03588em;">y</span><span
+                                                                    class="mspace"
+                                                                    style="margin-right: 0.2778em;"></span><span
+                                                                    class="mrel">=</span><span class="mspace"
+                                                                    style="margin-right: 0.2778em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.4445em;"></span><span
+                                                                    class="mord mathnormal">a</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span><span
+                                                                    class="mbin">⋅</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.7667em; vertical-align: -0.0833em;"></span><span
+                                                                    class="mord mathnormal"
+                                                                    style="margin-right: 0.07847em;">X</span><span
+                                                                    class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span><span
+                                                                    class="mbin">+</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                                                    class="mord">50</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span><span
+                                                                    class="mbin">+</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.4445em;"></span><span
+                                                                    class="mord mathnormal">c</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span><span
+                                                                    class="mbin">⋅</span><span class="mspace"
+                                                                    style="margin-right: 0.2222em;"></span></span><span
+                                                                class="base"><span class="strut"
+                                                                    style="height: 0.6679em;"></span><span
+                                                                    class="mord text"><span
+                                                                        class="mord">noise</span></span></span></span></span></span>
+                                                <p>where:</p>
+                                                <ul>
+                                                    <li><span class="katex"><span class="katex-mathml"><math
+                                                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                    <semantics>
+                                                                        <mrow>
+                                                                            <mi>a</mi>
+                                                                        </mrow>
+                                                                        <annotation encoding="application/x-tex">a
+                                                                        </annotation>
+                                                                    </semantics>
+                                                                </math></span><span class="katex-html"
+                                                                aria-hidden="true"><span class="base"><span
+                                                                        class="strut"
+                                                                        style="height: 0.4306em;"></span><span
+                                                                        class="mord mathnormal">a</span></span></span></span>
+                                                        is the coefficient that defines the slope of the line,</li>
+                                                    <li><span class="katex"><span class="katex-mathml"><math
+                                                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                    <semantics>
+                                                                        <mrow>
+                                                                            <mi>c</mi>
+                                                                        </mrow>
+                                                                        <annotation encoding="application/x-tex">c
+                                                                        </annotation>
+                                                                    </semantics>
+                                                                </math></span><span class="katex-html"
+                                                                aria-hidden="true"><span class="base"><span
+                                                                        class="strut"
+                                                                        style="height: 0.4306em;"></span><span
+                                                                        class="mord mathnormal">c</span></span></span></span>
+                                                        is a coefficient for the noise,</li>
+                                                    <li>noise is generated from a standard normal distribution.</li>
+                                                </ul>
+                                                <p>The app allows users to interactively adjust parameters and visualize
+                                                    the linear regression model's performance.</p>
+                                                <h2>Features</h2>
+                                                <ul>
+                                                    <li><strong>Interactive Inputs</strong>: Users can adjust the number
+                                                        of samples, coefficient <span class="katex"><span
+                                                                class="katex-mathml"><math
+                                                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                    <semantics>
+                                                                        <mrow>
+                                                                            <mi>a</mi>
+                                                                        </mrow>
+                                                                        <annotation encoding="application/x-tex">a
+                                                                        </annotation>
+                                                                    </semantics>
+                                                                </math></span><span class="katex-html"
+                                                                aria-hidden="true"><span class="base"><span
+                                                                        class="strut"
+                                                                        style="height: 0.4306em;"></span><span
+                                                                        class="mord mathnormal">a</span></span></span></span>,
+                                                        coefficient <span class="katex"><span class="katex-mathml"><math
+                                                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                    <semantics>
+                                                                        <mrow>
+                                                                            <mi>c</mi>
+                                                                        </mrow>
+                                                                        <annotation encoding="application/x-tex">c
+                                                                        </annotation>
+                                                                    </semantics>
+                                                                </math></span><span class="katex-html"
+                                                                aria-hidden="true"><span class="base"><span
+                                                                        class="strut"
+                                                                        style="height: 0.4306em;"></span><span
+                                                                        class="mord mathnormal">c</span></span></span></span>,
+                                                        and noise scale using sliders.</li>
+                                                    <li><strong>Real-time Visualization</strong>: The app displays a
+                                                        scatter plot of true values versus predicted values, updating
+                                                        dynamically based on the input parameters.</li>
+                                                    <li><strong>Model Evaluation</strong>: The app provides the
+                                                        estimated coefficient <span class="katex"><span
+                                                                class="katex-mathml"><math
+                                                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                    <semantics>
+                                                                        <mrow>
+                                                                            <mi>a</mi>
+                                                                        </mrow>
+                                                                        <annotation encoding="application/x-tex">a
+                                                                        </annotation>
+                                                                    </semantics>
+                                                                </math></span><span class="katex-html"
+                                                                aria-hidden="true"><span class="base"><span
+                                                                        class="strut"
+                                                                        style="height: 0.4306em;"></span><span
+                                                                        class="mord mathnormal">a</span></span></span></span>,
+                                                        intercept, and Mean Squared Error (MSE) of the model.</li>
+                                                </ul>
+                                                <h2>Technologies Used</h2>
+                                                <ul>
+                                                    <li>Python</li>
+                                                    <li>Streamlit</li>
+                                                    <li>Scikit-learn</li>
+                                                    <li>NumPy</li>
+                                                    <li>Plotly</li>
+                                                </ul>
+                                                <h2>Installation</h2>
+                                                <p>To run the app, you need to have Python installed on your machine.
+                                                    Follow these steps to set up the project:</p>
+                                                <ol>
+                                                    <li>
+                                                        <p><strong>Clone the repository:</strong></p>
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">git <span class="hljs-built_in">clone</span> &lt;repository-url&gt;
+<span class="hljs-built_in">cd</span> &lt;repository-directory&gt;
+</code></div></div></pre>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Install required packages:</strong></p>
+                                                        <p>You can use pip to install the required libraries. It is
+                                                            recommended to create a virtual environment first.</p>
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">pip install streamlit scikit-learn plotly numpy
+</code></div></div></pre>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Run the Streamlit app:</strong></p>
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">streamlit run linear_regression_app.py
+</code></div></div></pre>
+                                                    </li>
+                                                </ol>
+                                                <h2>Usage</h2>
+                                                <ol>
+                                                    <li>
+                                                        <p>Adjust the parameters in the sidebar:</p>
+                                                        <ul>
+                                                            <li><strong>Number of Samples</strong>: Set the number of
+                                                                data points to generate.</li>
+                                                            <li><strong>True Coefficient (a)</strong>: Set the slope of
+                                                                the linear relationship.</li>
+                                                            <li><strong>Noise Coefficient (c)</strong>: Set the
+                                                                coefficient that influences the noise in the data.</li>
+                                                            <li><strong>Noise Scale (c * noise)</strong>: Adjust the
+                                                                scale of the noise added to the model.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p>The main area of the app will display:</p>
+                                                        <ul>
+                                                            <li>The estimated coefficient <span class="katex"><span
+                                                                        class="katex-mathml"><math
+                                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                            <semantics>
+                                                                                <mrow>
+                                                                                    <mi>a</mi>
+                                                                                </mrow>
+                                                                                <annotation
+                                                                                    encoding="application/x-tex">a
+                                                                                </annotation>
+                                                                            </semantics>
+                                                                        </math></span><span class="katex-html"
+                                                                        aria-hidden="true"><span class="base"><span
+                                                                                class="strut"
+                                                                                style="height: 0.4306em;"></span><span
+                                                                                class="mord mathnormal">a</span></span></span></span>
+                                                                and intercept.</li>
+                                                            <li>The Mean Squared Error (MSE) of the predictions.</li>
+                                                            <li>A plot showing the true values and predicted values.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                                <h2>Example Screenshot</h2>
+                                                <p><em>(You may want to insert an example screenshot of your app
+                                                        here)</em></p>
+                                                <h2>License</h2>
+                                                <p>This project is licensed under the MIT License - see the <a
+                                                        rel="noopener noreferrer"
+                                                        style="--streaming-animation-state: var(--batch-play-state-1); --animation-rate: var(--batch-play-rate-1);"><span
+                                                            style="--animation-count: 0; --streaming-animation-state: var(--batch-play-state-2);">LICENSE</span></a>
+                                                    file for details.</p>
+                                                <h2>Acknowledgments</h2>
+                                                <ul>
+                                                    <li>Thanks to the Streamlit community for their continuous support
+                                                        and development of this interactive framework.</li>
+                                                    <li>Inspiration for the model design and structure came from various
+                                                        machine learning resources.</li>
+                                                </ul>
+                                                <hr>
+                                                <p>Feel free to adjust sections like "Example Screenshot" or any
+                                                    specific instructions based on your project structure. If you have
+                                                    any specific sections you'd like to add or change, let me know!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-14" data-scroll-anchor="false">
+                <h5 class="sr-only">你說：</h5>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="user"
+                                        data-message-id="aaa27a4c-0956-4c70-87ec-d00d87904624" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden items-end rtl:items-start">
+                                            <div
+                                                class="relative max-w-[70%] rounded-3xl px-5 py-2.5 bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
+                                                <div class="whitespace-pre-wrap">convert this conversation to readme
+                                                    code</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="w-full text-token-text-primary focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
+                dir="auto" data-testid="conversation-turn-15" data-scroll-anchor="true">
+                <h6 class="sr-only">ChatGPT 說：</h6>
+                <div class="text-base py-[18px] px-3 md:px-4 m-auto">
+                    <div
+                        class="mx-auto flex flex-1 gap-4 text-base md:gap-5 lg:gap-6 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem]">
+                        <div class="flex-shrink-0 flex flex-col relative items-end">
+                            <div>
+                                <div class="pt-0">
+                                    <div
+                                        class="gizmo-bot-avatar flex h-8 w-8 items-center justify-center overflow-hidden rounded-full">
+                                        <div
+                                            class="relative p-1 rounded-sm flex items-center justify-center bg-token-main-surface-primary text-token-text-primary h-8 w-8">
+                                            <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="icon-md" role="img"><text
+                                                    x="-9999" y="-9999">ChatGPT</text>
+                                                <path
+                                                    d="M37.5324 16.8707C37.9808 15.5241 38.1363 14.0974 37.9886 12.6859C37.8409 11.2744 37.3934 9.91076 36.676 8.68622C35.6126 6.83404 33.9882 5.3676 32.0373 4.4985C30.0864 3.62941 27.9098 3.40259 25.8215 3.85078C24.8796 2.7893 23.7219 1.94125 22.4257 1.36341C21.1295 0.785575 19.7249 0.491269 18.3058 0.500197C16.1708 0.495044 14.0893 1.16803 12.3614 2.42214C10.6335 3.67624 9.34853 5.44666 8.6917 7.47815C7.30085 7.76286 5.98686 8.3414 4.8377 9.17505C3.68854 10.0087 2.73073 11.0782 2.02839 12.312C0.956464 14.1591 0.498905 16.2988 0.721698 18.4228C0.944492 20.5467 1.83612 22.5449 3.268 24.1293C2.81966 25.4759 2.66413 26.9026 2.81182 28.3141C2.95951 29.7256 3.40701 31.0892 4.12437 32.3138C5.18791 34.1659 6.8123 35.6322 8.76321 36.5013C10.7141 37.3704 12.8907 37.5973 14.9789 37.1492C15.9208 38.2107 17.0786 39.0587 18.3747 39.6366C19.6709 40.2144 21.0755 40.5087 22.4946 40.4998C24.6307 40.5054 26.7133 39.8321 28.4418 38.5772C30.1704 37.3223 31.4556 35.5506 32.1119 33.5179C33.5027 33.2332 34.8167 32.6547 35.9659 31.821C37.115 30.9874 38.0728 29.9178 38.7752 28.684C39.8458 26.8371 40.3023 24.6979 40.0789 22.5748C39.8556 20.4517 38.9639 18.4544 37.5324 16.8707ZM22.4978 37.8849C20.7443 37.8874 19.0459 37.2733 17.6994 36.1501C17.7601 36.117 17.8666 36.0586 17.936 36.0161L25.9004 31.4156C26.1003 31.3019 26.2663 31.137 26.3813 30.9378C26.4964 30.7386 26.5563 30.5124 26.5549 30.2825V19.0542L29.9213 20.998C29.9389 21.0068 29.9541 21.0198 29.9656 21.0359C29.977 21.052 29.9842 21.0707 29.9867 21.0902V30.3889C29.9842 32.375 29.1946 34.2791 27.7909 35.6841C26.3872 37.0892 24.4838 37.8806 22.4978 37.8849ZM6.39227 31.0064C5.51397 29.4888 5.19742 27.7107 5.49804 25.9832C5.55718 26.0187 5.66048 26.0818 5.73461 26.1244L13.699 30.7248C13.8975 30.8408 14.1233 30.902 14.3532 30.902C14.583 30.902 14.8088 30.8408 15.0073 30.7248L24.731 25.1103V28.9979C24.7321 29.0177 24.7283 29.0376 24.7199 29.0556C24.7115 29.0736 24.6988 29.0893 24.6829 29.1012L16.6317 33.7497C14.9096 34.7416 12.8643 35.0097 10.9447 34.4954C9.02506 33.9811 7.38785 32.7263 6.39227 31.0064ZM4.29707 13.6194C5.17156 12.0998 6.55279 10.9364 8.19885 10.3327C8.19885 10.4013 8.19491 10.5228 8.19491 10.6071V19.808C8.19351 20.0378 8.25334 20.2638 8.36823 20.4629C8.48312 20.6619 8.64893 20.8267 8.84863 20.9404L18.5723 26.5542L15.206 28.4979C15.1894 28.5089 15.1703 28.5155 15.1505 28.5173C15.1307 28.5191 15.1107 28.516 15.0924 28.5082L7.04046 23.8557C5.32135 22.8601 4.06716 21.2235 3.55289 19.3046C3.03862 17.3858 3.30624 15.3413 4.29707 13.6194ZM31.955 20.0556L22.2312 14.4411L25.5976 12.4981C25.6142 12.4872 25.6333 12.4805 25.6531 12.4787C25.6729 12.4769 25.6928 12.4801 25.7111 12.4879L33.7631 17.1364C34.9967 17.849 36.0017 18.8982 36.6606 20.1613C37.3194 21.4244 37.6047 22.849 37.4832 24.2684C37.3617 25.6878 36.8382 27.0432 35.9743 28.1759C35.1103 29.3086 33.9415 30.1717 32.6047 30.6641C32.6047 30.5947 32.6047 30.4733 32.6047 30.3889V21.188C32.6066 20.9586 32.5474 20.7328 32.4332 20.5338C32.319 20.3348 32.154 20.1698 31.955 20.0556ZM35.3055 15.0128C35.2464 14.9765 35.1431 14.9142 35.069 14.8717L27.1045 10.2712C26.906 10.1554 26.6803 10.0943 26.4504 10.0943C26.2206 10.0943 25.9948 10.1554 25.7963 10.2712L16.0726 15.8858V11.9982C16.0715 11.9783 16.0753 11.9585 16.0837 11.9405C16.0921 11.9225 16.1048 11.9068 16.1207 11.8949L24.1719 7.25025C25.4053 6.53903 26.8158 6.19376 28.2383 6.25482C29.6608 6.31589 31.0364 6.78077 32.2044 7.59508C33.3723 8.40939 34.2842 9.53945 34.8334 10.8531C35.3826 12.1667 35.5464 13.6095 35.3055 15.0128ZM14.2424 21.9419L10.8752 19.9981C10.8576 19.9893 10.8423 19.9763 10.8309 19.9602C10.8195 19.9441 10.8122 19.9254 10.8098 19.9058V10.6071C10.8107 9.18295 11.2173 7.78848 11.9819 6.58696C12.7466 5.38544 13.8377 4.42659 15.1275 3.82264C16.4173 3.21869 17.8524 2.99464 19.2649 3.1767C20.6775 3.35876 22.0089 3.93941 23.1034 4.85067C23.0427 4.88379 22.937 4.94215 22.8668 4.98473L14.9024 9.58517C14.7025 9.69878 14.5366 9.86356 14.4215 10.0626C14.3065 10.2616 14.2466 10.4877 14.2479 10.7175L14.2424 21.9419ZM16.071 17.9991L20.4018 15.4978L24.7325 17.9975V22.9985L20.4018 25.4983L16.071 22.9985V17.9991Z"
+                                                    fill="currentColor"></path>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group/conversation-turn relative flex w-full min-w-0 flex-col agent-turn">
+                            <div class="flex-col gap-1 md:gap-3">
+                                <div class="flex max-w-full flex-col flex-grow">
+                                    <div data-message-author-role="assistant"
+                                        data-message-id="06ff749f-8bae-4b54-a7b9-24bae2d60077" dir="auto"
+                                        class="min-h-8 text-message flex w-full flex-col items-end gap-2 whitespace-normal break-words [.text-message+&amp;]:mt-5">
+                                        <div class="flex w-full flex-col gap-1 empty:hidden first:pt-[3px]">
+                                            <div class="markdown prose w-full break-words dark:prose-invert dark">
+                                                <p>Here’s the complete README formatted in Markdown code based on our
+                                                    conversation:</p>
+                                                <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">markdown</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-markdown"><span class="hljs-section"># Linear Regression Example with Noise</span>
+
+<span class="hljs-section">## Overview</span>
+
+This Streamlit app models the relationship between input variable \( X \) and output variable \( y \) using the equation:
+
+\[
+y = a \cdot X + 50 + c \cdot \text{noise}
+\]
+
+where:
+<span class="hljs-bullet">-</span> \( a \) is the coefficient that defines the slope of the line,
+<span class="hljs-bullet">-</span> \( c \) is a coefficient for the noise,
+<span class="hljs-bullet">-</span> noise is generated from a standard normal distribution.
+
+The app allows users to interactively adjust parameters and visualize the linear regression model's performance.
+
+<span class="hljs-section">## Features</span>
+
+<span class="hljs-bullet">-</span> <span class="hljs-strong">**Interactive Inputs**</span>: Users can adjust the number of samples, coefficient \( a \), coefficient \( c \), and noise scale using sliders.
+<span class="hljs-bullet">-</span> <span class="hljs-strong">**Real-time Visualization**</span>: The app displays a scatter plot of true values versus predicted values, updating dynamically based on the input parameters.
+<span class="hljs-bullet">-</span> <span class="hljs-strong">**Model Evaluation**</span>: The app provides the estimated coefficient \( a \), intercept, and Mean Squared Error (MSE) of the model.
+
+<span class="hljs-section">## Technologies Used</span>
+
+<span class="hljs-bullet">-</span> Python
+<span class="hljs-bullet">-</span> Streamlit
+<span class="hljs-bullet">-</span> Scikit-learn
+<span class="hljs-bullet">-</span> NumPy
+<span class="hljs-bullet">-</span> Plotly
+
+<span class="hljs-section">## Installation</span>
+
+To run the app, you need to have Python installed on your machine. Follow these steps to set up the project:
+
+<span class="hljs-bullet">1.</span> <span class="hljs-strong">**Clone the repository:**</span>
+
+   <span class="hljs-code">```bash
+   git clone &lt;repository-url&gt;
+   cd &lt;repository-directory&gt;
+</span></code></div></div></pre>
+                                                <ol start="2">
+                                                    <li>
+                                                        <p><strong>Install required packages:</strong></p>
+                                                        <p>You can use pip to install the required libraries. It is
+                                                            recommended to create a virtual environment first.</p>
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">pip install streamlit scikit-learn plotly numpy
+</code></div></div></pre>
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Run the Streamlit app:</strong></p>
+                                                        <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">streamlit run linear_regression_app.py
+</code></div></div></pre>
+                                                    </li>
+                                                </ol>
+                                                <h2>Usage</h2>
+                                                <ol>
+                                                    <li>
+                                                        <p>Adjust the parameters in the sidebar:</p>
+                                                        <ul>
+                                                            <li><strong>Number of Samples</strong>: Set the number of
+                                                                data points to generate.</li>
+                                                            <li><strong>True Coefficient (a)</strong>: Set the slope of
+                                                                the linear relationship.</li>
+                                                            <li><strong>Noise Coefficient (c)</strong>: Set the
+                                                                coefficient that influences the noise in the data.</li>
+                                                            <li><strong>Noise Scale (c * noise)</strong>: Adjust the
+                                                                scale of the noise added to the model.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p>The main area of the app will display:</p>
+                                                        <ul>
+                                                            <li>The estimated coefficient <span class="katex"><span
+                                                                        class="katex-mathml"><math
+                                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                                            <semantics>
+                                                                                <mrow>
+                                                                                    <mi>a</mi>
+                                                                                </mrow>
+                                                                                <annotation
+                                                                                    encoding="application/x-tex">a
+                                                                                </annotation>
+                                                                            </semantics>
+                                                                        </math></span><span class="katex-html"
+                                                                        aria-hidden="true"><span class="base"><span
+                                                                                class="strut"
+                                                                                style="height: 0.4306em;"></span><span
+                                                                                class="mord mathnormal">a</span></span></span></span>
+                                                                and intercept.</li>
+                                                            <li>The Mean Squared Error (MSE) of the predictions.</li>
+                                                            <li>A plot showing the true values and predicted values.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                                <h2>Example Screenshot</h2>
+                                                <p><em>(You may want to insert an example screenshot of your app
+                                                        here)</em></p>
+                                                <h2>License</h2>
+                                                <p>This project is licensed under the MIT License - see the <a
+                                                        rel="noopener noreferrer"
+                                                        style="--streaming-animation-state: var(--batch-play-state-1); --animation-rate: var(--batch-play-rate-1);"><span
+                                                            style="--animation-count: 1; --streaming-animation-state: var(--batch-play-state-2);">LICENSE</span></a>
+                                                    file for details.</p>
+                                                <h2>Acknowledgments</h2>
+                                                <ul>
+                                                    <li>Thanks to the Streamlit community for their continuous support
+                                                        and development of this interactive framework.</li>
+                                                    <li>Inspiration for the model design and structure came from various
+                                                        machine learning resources.</li>
+                                                </ul>
+                                                <pre class="!overflow-visible"><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative"><div class="flex items-center text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9">sql</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-main-surface-secondary px-2 font-sans text-xs text-token-text-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>複製程式碼</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-sql">
+You can replace `<span class="hljs-operator">&lt;</span>repository<span class="hljs-operator">-</span>url<span class="hljs-operator">&gt;</span>` <span class="hljs-keyword">and</span> `<span class="hljs-operator">&lt;</span>repository<span class="hljs-operator">-</span>directory<span class="hljs-operator">&gt;</span>` <span class="hljs-keyword">with</span> the actual <span class="hljs-keyword">values</span> <span class="hljs-keyword">for</span> your project. If you need <span class="hljs-keyword">any</span> additional sections <span class="hljs-keyword">or</span> modifications, feel <span class="hljs-keyword">free</span> <span class="hljs-keyword">to</span> ask<span class="hljs-operator">!</span>
+</code></div></div></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div><audio class="fixed bottom-0 left-0 hidden h-0 w-0" autoplay="" crossorigin="anonymous"></audio><span
+        class="pointer-events-none fixed inset-0 z-[60] mx-auto my-2 flex max-w-[560px] flex-col items-stretch justify-start md:pb-5"></span>
+</body>
+
+</html>
