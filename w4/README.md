@@ -53,3 +53,6 @@ Visualizations of predictions from each model are generated to compare actual vs
 Version: 7.2
 Author: Weston
 Date: 2024-10-14
+
+## ChatGPT Prompt Log
+[ChatGpt Prompt Log](https://chatgpt.com/share/670cb1de-bbd8-8003-ad15-b0805fe3b705)
