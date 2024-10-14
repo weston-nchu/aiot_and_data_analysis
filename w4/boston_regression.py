@@ -1,8 +1,8 @@
-# Version: v7.0
+# Version: v7.1
 # Author: Weston
 # Date: 2024-10-14
 # Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
-# Updated to predict y_test values.
+# Updated to fix a syntax error in the plotting section.
 
 import pandas as pd
 import numpy as np
@@ -87,19 +87,19 @@ print(f'Random Forest Predictions:\n{y_pred_rf}')
 plt.figure(figsize=(15, 5))
 
 plt.subplot(1, 3, 1)
-sns.scatterplot(x=y_test, y_pred_lr)
+sns.scatterplot(x=y_test, y=y_pred_lr)
 plt.xlabel('Actual Prices')
 plt.ylabel('Predicted Prices')
 plt.title('Linear Regression Predictions')
 
 plt.subplot(1, 3, 2)
-sns.scatterplot(x=y_test, y_pred_lasso)
+sns.scatterplot(x=y_test, y=y_pred_lasso)
 plt.xlabel('Actual Prices')
 plt.ylabel('Predicted Prices')
 plt.title('Lasso Regression Predictions')
 
 plt.subplot(1, 3, 3)
-sns.scatterplot(x=y_test, y_pred_rf)
+sns.scatterplot(x=y_test, y=y_pred_rf)
 plt.xlabel('Actual Prices')
 plt.ylabel('Predicted Prices')
 plt.title('Random Forest Predictions')
