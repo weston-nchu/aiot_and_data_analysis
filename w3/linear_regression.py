@@ -11,7 +11,7 @@ from sklearn.metrics import mean_squared_error
 st.title("Linear Regression Example with Noise")
 
 # Create ChatGPT prompt history dialog
-with open("w3/chatgpt_prompt_history.html", "r", encoding="utf-8") as f:
+with open("chatgpt_prompt_history.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 @st.dialog("ChatGpt prompt history", width="large")
 def prompt_history():

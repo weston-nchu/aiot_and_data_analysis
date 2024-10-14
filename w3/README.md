@@ -51,7 +51,7 @@ To run the app, you need to have Python installed on your machine. Follow these 
 3. **Run the Streamlit app:**
 
    ```bash
-   streamlit run linear_regression_app.py
+   streamlit run linear_regression.py
    ```
 
 ## Usage
