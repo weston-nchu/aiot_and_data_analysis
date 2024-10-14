@@ -1,12 +1,13 @@
-# Version: v7.1
+# Version: v7.2
 # Author: Weston
 # Date: 2024-10-14
 # Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
-# Updated to fix a syntax error in the plotting section.
+# Updated to fix the AttributeError in reading the CSV data.
 
 import pandas as pd
 import numpy as np
 import requests
+from io import StringIO
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.ensemble import RandomForestRegressor
@@ -20,7 +21,7 @@ url = "https://raw.githubusercontent.com/selva86/datasets/master/BostonHousing.c
 response = requests.get(url)
 
 # Save the CSV content to a pandas DataFrame
-data = pd.read_csv(pd.compat.StringIO(response.text))
+data = pd.read_csv(StringIO(response.text))
 
 # Display basic information about the dataset
 print(data.info())
