@@ -1,8 +1,8 @@
-# Version: v3.0
+# Version: v4.0
 # Author: Weston
 # Date: 2024-10-14
 # Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
-# Updated to prepare X, Y using Train-Test Split.
+# Updated to explicitly split the dataset using the train_test_split function.
 
 import pandas as pd
 import numpy as np
