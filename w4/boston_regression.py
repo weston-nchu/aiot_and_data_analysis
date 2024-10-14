@@ -1,6 +1,12 @@
+# Version: v1.1
+# Author: [Weston]
+# Date: [20224/10/14]
+# Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
+# Updated to fetch dataset using a web crawler.
+
 import pandas as pd
 import numpy as np
-from sklearn.datasets import fetch_openml
+import requests
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -9,10 +15,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Step 2: Data Understanding
-# Load the Boston Housing dataset
-boston = fetch_openml(name='boston', version=1)
-data = pd.DataFrame(data=boston.data, columns=boston.feature_names)
-data['MEDV'] = boston.target
+# Fetch the dataset from the URL
+url = "https://raw.githubusercontent.com/selva86/datasets/master/BostonHousing.csv"
+response = requests.get(url)
+
+# Save the CSV content to a pandas DataFrame
+data = pd.read_csv(pd.compat.StringIO(response.text))
 
 # Display basic information about the dataset
 print(data.info())
@@ -23,8 +31,8 @@ print(data.describe())
 print(data.isnull().sum())
 
 # Split the data into features and target variable
-X = data.drop('MEDV', axis=1)
-y = data['MEDV']
+X = data.drop('medv', axis=1)  # 'medv' is the target variable
+y = data['medv']
 
 # Split the dataset into training and testing sets (80% train, 20% test)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
