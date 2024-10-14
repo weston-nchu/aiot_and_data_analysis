@@ -28,21 +28,23 @@ The dataset is fetched from the following URL:
 
 ## Methodology
 This project follows the CRISP-DM (Cross-Industry Standard Process for Data Mining) methodology:
-1. Data Understanding: Understanding the data structure and key features.
-2. Data Preparation: Cleaning and preparing the data for modeling, including handling missing values and splitting the dataset.
-3. Modeling: Building different regression models (Linear Regression, Lasso Regression, and Random Forest) to predict housing prices.
-4. Evaluation: Assessing the performance of the models using appropriate metrics.
-5. Deployment (optional): Integrating the model into a production environment (not covered in this project).
+1. **Data Understanding**: Understanding the data structure and key features.
+2. **Data Preparation**: Cleaning and preparing the data for modeling, including handling missing values and splitting the dataset.
+3. **Modeling**: Building different regression models (Linear Regression, Lasso Regression, and Random Forest) to predict housing prices.
+4. **Evaluation**: Assessing the performance of the models using appropriate metrics.
+5. **Deployment (optional)**: Integrating the model into a production environment (not covered in this project).
 
 ## Model Evaluation
-1. Models evaluated include:
-Linear Regression: Simple and interpretable linear model.
-Lasso Regression: Linear model with L1 regularization to prevent overfitting.
-Random Forest: Ensemble model that combines multiple decision trees for improved accuracy.
-2. Performance metrics used:
-Mean Absolute Error (MAE): Average absolute difference between predicted and actual values.
-Mean Squared Error (MSE): Average squared difference between predicted and actual values.
-R² Score: Proportion of variance in the target variable that can be explained by the model.
+
+### 1. Models Evaluated
+1. **Linear Regression**: A simple and interpretable linear model that predicts the target variable as a linear combination of input features.
+2. **Lasso Regression**: A linear model that incorporates L1 regularization to reduce the risk of overfitting by penalizing large coefficients.
+3. **Random Forest**: An ensemble model that combines the predictions of multiple decision trees to enhance accuracy and robustness.
+
+### 2. Performance Metrics Used
+1. **Mean Absolute Error (MAE)**: Measures the average absolute difference between predicted and actual values, providing insight into prediction accuracy.
+2. **Mean Squared Error (MSE)**: Calculates the average squared difference between predicted and actual values, emphasizing larger errors due to squaring.
+3. **R² Score**: Represents the proportion of variance in the target variable that can be explained by the model, indicating how well the model fits the data.
 
 ## Visualization
 Visualizations of predictions from each model are generated to compare actual vs. predicted values. Scatter plots are used to illustrate the relationship between actual housing prices and predicted prices for each model.
