@@ -1,14 +1,14 @@
-# Version: v4.0
+# Version: v5.0
 # Author: Weston
 # Date: 2024-10-14
 # Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
-# Updated to explicitly split the dataset using the train_test_split function.
+# Updated to include Lasso regression model.
 
 import pandas as pd
 import numpy as np
 import requests
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
@@ -43,18 +43,19 @@ X_train = (X_train - X_train.mean()) / X_train.std()
 X_test = (X_test - X_test.mean()) / X_test.std()
 
 # Step 5: Modeling
-# Choose a model: Linear Regression
+# Choose models: Linear Regression, Lasso Regression, and Random Forest
 lr_model = LinearRegression()
 lr_model.fit(X_train, y_train)
 
-# Predicting
-y_pred_lr = lr_model.predict(X_test)
+lasso_model = Lasso(alpha=0.1)  # You can adjust the alpha parameter
+lasso_model.fit(X_train, y_train)
 
-# Alternative Model: Random Forest Regressor
 rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
 rf_model.fit(X_train, y_train)
 
 # Predicting
+y_pred_lr = lr_model.predict(X_test)
+y_pred_lasso = lasso_model.predict(X_test)
 y_pred_rf = rf_model.predict(X_test)
 
 # Step 6: Evaluation
@@ -63,21 +64,32 @@ mae_lr = mean_absolute_error(y_test, y_pred_lr)
 mse_lr = mean_squared_error(y_test, y_pred_lr)
 print(f'Linear Regression MAE: {mae_lr:.2f}, MSE: {mse_lr:.2f}')
 
+# Evaluate Lasso Regression model
+mae_lasso = mean_absolute_error(y_test, y_pred_lasso)
+mse_lasso = mean_squared_error(y_test, y_pred_lasso)
+print(f'Lasso Regression MAE: {mae_lasso:.2f}, MSE: {mse_lasso:.2f}')
+
 # Evaluate Random Forest model
 mae_rf = mean_absolute_error(y_test, y_pred_rf)
 mse_rf = mean_squared_error(y_test, y_pred_rf)
 print(f'Random Forest MAE: {mae_rf:.2f}, MSE: {mse_rf:.2f}')
 
 # Optional: Visualization of Predictions
-plt.figure(figsize=(12, 6))
+plt.figure(figsize=(15, 5))
 
-plt.subplot(1, 2, 1)
+plt.subplot(1, 3, 1)
 sns.scatterplot(x=y_test, y=y_pred_lr)
 plt.xlabel('Actual Prices')
 plt.ylabel('Predicted Prices')
 plt.title('Linear Regression Predictions')
 
-plt.subplot(1, 2, 2)
+plt.subplot(1, 3, 2)
+sns.scatterplot(x=y_test, y=y_pred_lasso)
+plt.xlabel('Actual Prices')
+plt.ylabel('Predicted Prices')
+plt.title('Lasso Regression Predictions')
+
+plt.subplot(1, 3, 3)
 sns.scatterplot(x=y_test, y=y_pred_rf)
 plt.xlabel('Actual Prices')
 plt.ylabel('Predicted Prices')
