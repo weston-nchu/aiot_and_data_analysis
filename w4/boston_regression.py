@@ -1,8 +1,8 @@
-# Version: v5.0
+# Version: v6.0
 # Author: Weston
 # Date: 2024-10-14
 # Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
-# Updated to include Lasso regression model.
+# Updated to evaluate models by R² Score and MSE.
 
 import pandas as pd
 import numpy as np
@@ -10,7 +10,7 @@ import requests
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -62,35 +62,38 @@ y_pred_rf = rf_model.predict(X_test)
 # Evaluate Linear Regression model
 mae_lr = mean_absolute_error(y_test, y_pred_lr)
 mse_lr = mean_squared_error(y_test, y_pred_lr)
-print(f'Linear Regression MAE: {mae_lr:.2f}, MSE: {mse_lr:.2f}')
+r2_lr = r2_score(y_test, y_pred_lr)
+print(f'Linear Regression MAE: {mae_lr:.2f}, MSE: {mse_lr:.2f}, R²: {r2_lr:.2f}')
 
 # Evaluate Lasso Regression model
 mae_lasso = mean_absolute_error(y_test, y_pred_lasso)
 mse_lasso = mean_squared_error(y_test, y_pred_lasso)
-print(f'Lasso Regression MAE: {mae_lasso:.2f}, MSE: {mse_lasso:.2f}')
+r2_lasso = r2_score(y_test, y_pred_lasso)
+print(f'Lasso Regression MAE: {mae_lasso:.2f}, MSE: {mse_lasso:.2f}, R²: {r2_lasso:.2f}')
 
 # Evaluate Random Forest model
 mae_rf = mean_absolute_error(y_test, y_pred_rf)
 mse_rf = mean_squared_error(y_test, y_pred_rf)
-print(f'Random Forest MAE: {mae_rf:.2f}, MSE: {mse_rf:.2f}')
+r2_rf = r2_score(y_test, y_pred_rf)
+print(f'Random Forest MAE: {mae_rf:.2f}, MSE: {mse_rf:.2f}, R²: {r2_rf:.2f}')
 
 # Optional: Visualization of Predictions
 plt.figure(figsize=(15, 5))
 
 plt.subplot(1, 3, 1)
-sns.scatterplot(x=y_test, y=y_pred_lr)
+sns.scatterplot(x=y_test, y_pred_lr)
 plt.xlabel('Actual Prices')
 plt.ylabel('Predicted Prices')
 plt.title('Linear Regression Predictions')
 
 plt.subplot(1, 3, 2)
-sns.scatterplot(x=y_test, y=y_pred_lasso)
+sns.scatterplot(x=y_test, y_pred_lasso)
 plt.xlabel('Actual Prices')
 plt.ylabel('Predicted Prices')
 plt.title('Lasso Regression Predictions')
 
 plt.subplot(1, 3, 3)
-sns.scatterplot(x=y_test, y=y_pred_rf)
+sns.scatterplot(x=y_test, y_pred_rf)
 plt.xlabel('Actual Prices')
 plt.ylabel('Predicted Prices')
 plt.title('Random Forest Predictions')
