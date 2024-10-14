@@ -1,8 +1,8 @@
-# Version: v2.0
-# Author: [Weston]
-# Date: [2024/10/14]
+# Version: v3.0
+# Author: Weston
+# Date: 2024-10-14
 # Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
-# Updated to fetch dataset using a web crawler.
+# Updated to prepare X, Y using Train-Test Split.
 
 import pandas as pd
 import numpy as np
@@ -34,6 +34,7 @@ print(data.isnull().sum())
 X = data.drop('medv', axis=1)  # 'medv' is the target variable
 y = data['medv']
 
+# Step 4: Train-Test Split
 # Split the dataset into training and testing sets (80% train, 20% test)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -41,7 +42,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 X_train = (X_train - X_train.mean()) / X_train.std()
 X_test = (X_test - X_test.mean()) / X_test.std()
 
-# Step 4: Modeling
+# Step 5: Modeling
 # Choose a model: Linear Regression
 lr_model = LinearRegression()
 lr_model.fit(X_train, y_train)
@@ -56,7 +57,7 @@ rf_model.fit(X_train, y_train)
 # Predicting
 y_pred_rf = rf_model.predict(X_test)
 
-# Step 5: Evaluation
+# Step 6: Evaluation
 # Evaluate Linear Regression model
 mae_lr = mean_absolute_error(y_test, y_pred_lr)
 mse_lr = mean_squared_error(y_test, y_pred_lr)
