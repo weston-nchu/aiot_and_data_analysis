@@ -1,8 +1,8 @@
-# Version: v6.0
+# Version: v7.0
 # Author: Weston
 # Date: 2024-10-14
 # Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
-# Updated to evaluate models by R² Score and MSE.
+# Updated to predict y_test values.
 
 import pandas as pd
 import numpy as np
@@ -76,6 +76,12 @@ mae_rf = mean_absolute_error(y_test, y_pred_rf)
 mse_rf = mean_squared_error(y_test, y_pred_rf)
 r2_rf = r2_score(y_test, y_pred_rf)
 print(f'Random Forest MAE: {mae_rf:.2f}, MSE: {mse_rf:.2f}, R²: {r2_rf:.2f}')
+
+# Predict y_test values
+print("Predicted values for y_test:")
+print(f'Linear Regression Predictions:\n{y_pred_lr}')
+print(f'Lasso Regression Predictions:\n{y_pred_lasso}')
+print(f'Random Forest Predictions:\n{y_pred_rf}')
 
 # Optional: Visualization of Predictions
 plt.figure(figsize=(15, 5))
