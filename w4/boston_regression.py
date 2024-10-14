@@ -1,6 +1,6 @@
-# Version: v1.1
+# Version: v2.0
 # Author: [Weston]
-# Date: [20224/10/14]
+# Date: [2024/10/14]
 # Description: Solving the Boston Housing Problem using Scikit-Learn and CRISP-DM
 # Updated to fetch dataset using a web crawler.
 
