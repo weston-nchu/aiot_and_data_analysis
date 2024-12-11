@@ -162,3 +162,8 @@ cython_debug/
 #.idea/
 
 .DS_Store
+*/*.keras
+*/*.h5
+
+w9/data
+w9/tb_logs
