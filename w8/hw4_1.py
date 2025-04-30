@@ -31,7 +31,7 @@ performance_metrics = pull()  # Retrieve model comparison results
 performance_metrics = performance_metrics.sort_values(by="Accuracy", ascending=False)
 
 # Plot Accuracy
-plt.figure(figsize=(14, 8))
+plt.figure(figsize=(10, 6))
 plt.barh(performance_metrics['Model'], performance_metrics['Accuracy'], color='skyblue')
 plt.title("Accuracy of Top 16 Models", fontsize=16)
 plt.xlabel("Accuracy", fontsize=14)
